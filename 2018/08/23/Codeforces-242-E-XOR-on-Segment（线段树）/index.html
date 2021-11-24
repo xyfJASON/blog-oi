@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog-oi/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog-oi/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog-oi/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/blog-oi/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/blog-oi/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"xyfjason.github.io","root":"/blog-oi/","images":"/blog-oi/images","scheme":"Gemini","darkmode":false,"version":"8.8.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/blog-oi/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/blog-oi/js/config.js"></script>
+<meta name="description" content="Codeforces 242E">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Codeforces 242.E] XOR on Segment（线段树）">
+<meta property="og:url" content="http://xyfjason.github.io/blog-oi/2018/08/23/Codeforces-242-E-XOR-on-Segment%EF%BC%88%E7%BA%BF%E6%AE%B5%E6%A0%91%EF%BC%89/index.html">
+<meta property="og:site_name" content="xyfJASON">
+<meta property="og:description" content="Codeforces 242E">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://xyfjason.github.io/blog-oi/2018/08/23/Codeforces-242-E-XOR-on-Segment%EF%BC%88%E7%BA%BF%E6%AE%B5%E6%A0%91%EF%BC%89/1.png">
+<meta property="article:published_time" content="2018-08-23T14:06:54.000Z">
+<meta property="article:modified_time" content="2021-11-23T02:24:11.252Z">
+<meta property="article:author" content="xyfJASON">
+<meta property="article:tag" content="Codeforces">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://xyfjason.github.io/blog-oi/2018/08/23/Codeforces-242-E-XOR-on-Segment%EF%BC%88%E7%BA%BF%E6%AE%B5%E6%A0%91%EF%BC%89/1.png">
+
+
+<link rel="canonical" href="http://xyfjason.github.io/blog-oi/2018/08/23/Codeforces-242-E-XOR-on-Segment%EF%BC%88%E7%BA%BF%E6%AE%B5%E6%A0%91%EF%BC%89/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://xyfjason.github.io/blog-oi/2018/08/23/Codeforces-242-E-XOR-on-Segment%EF%BC%88%E7%BA%BF%E6%AE%B5%E6%A0%91%EF%BC%89/","path":"2018/08/23/Codeforces-242-E-XOR-on-Segment（线段树）/","title":"[Codeforces 242.E] XOR on Segment（线段树）"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>[Codeforces 242.E] XOR on Segment（线段树） | xyfJASON</title>
+  
+
+  <script src="/blog-oi/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?f7e5c188ac0fc91848fb599cdef123bf"></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/blog-oi/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/blog-oi/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">xyfJASON</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">诗酒趁年华</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/blog-oi/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-about"><a href="/blog-oi/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+        <li class="menu-item menu-item-tags"><a href="/blog-oi/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/blog-oi/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/blog-oi/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#E-XOR-on-Segment"><span class="nav-number">1.</span> <span class="nav-text">E. XOR on Segment</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Input"><span class="nav-number">1.1.</span> <span class="nav-text">Input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Output"><span class="nav-number">1.2.</span> <span class="nav-text">Output</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Examples"><span class="nav-number">1.3.</span> <span class="nav-text">Examples</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF"><span class="nav-number">2.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Code"><span class="nav-number">3.</span> <span class="nav-text">Code</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">xyfJASON</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/blog-oi/archives/">
+          <span class="site-state-item-count">41</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/blog-oi/categories/">
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/blog-oi/tags/">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/xyfjason" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;xyfjason" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://309459245.lofter.com/" title="http:&#x2F;&#x2F;309459245.lofter.com&#x2F;" rel="noopener" target="_blank">yjq</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://mcfx.us/" title="https:&#x2F;&#x2F;mcfx.us&#x2F;" rel="noopener" target="_blank">mcfx</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.csdn.net/wxh010910" title="https:&#x2F;&#x2F;blog.csdn.net&#x2F;wxh010910" rel="noopener" target="_blank">wxh010910</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.csdn.net/yfzcsc" title="https:&#x2F;&#x2F;blog.csdn.net&#x2F;yfzcsc" rel="noopener" target="_blank">yfzcsc</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://owenowl.net/blogs/" title="http:&#x2F;&#x2F;owenowl.net&#x2F;blogs&#x2F;" rel="noopener" target="_blank">OwenOwl</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.csdn.net/OwenOwl" title="https:&#x2F;&#x2F;blog.csdn.net&#x2F;OwenOwl" rel="noopener" target="_blank">OwenOwl(CSDN)</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.csdn.net/Joker_69" title="https:&#x2F;&#x2F;blog.csdn.net&#x2F;Joker_69" rel="noopener" target="_blank">Joker</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://hzwer.com/" title="http:&#x2F;&#x2F;hzwer.com&#x2F;" rel="noopener" target="_blank">hzwer</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://ruanx.pw/" title="http:&#x2F;&#x2F;ruanx.pw" rel="noopener" target="_blank">ruanx</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/candy99/" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;candy99&#x2F;" rel="noopener" target="_blank">Candy?</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://oi.men.ci/#blog" title="https:&#x2F;&#x2F;oi.men.ci&#x2F;#blog" rel="noopener" target="_blank">Menci</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://rqy.moe/" title="https:&#x2F;&#x2F;rqy.moe&#x2F;" rel="noopener" target="_blank">_rqy</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://www.cnblogs.com/mlystdcall/" title="http:&#x2F;&#x2F;www.cnblogs.com&#x2F;mlystdcall&#x2F;" rel="noopener" target="_blank">__stdcall</a>
+        </li>
+    </ul>
+  </div>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xyfjason.github.io/blog-oi/2018/08/23/Codeforces-242-E-XOR-on-Segment%EF%BC%88%E7%BA%BF%E6%AE%B5%E6%A0%91%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog-oi/images/avatar.gif">
+      <meta itemprop="name" content="xyfJASON">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xyfJASON">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Codeforces 242.E] XOR on Segment（线段树）
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-08-23 22:06:54" itemprop="dateCreated datePublished" datetime="2018-08-23T22:06:54+08:00">2018-08-23</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-11-23 10:24:11" itemprop="dateModified" datetime="2021-11-23T10:24:11+08:00">2021-11-23</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/blog-oi/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">数据结构</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/blog-oi/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%BA%BF%E6%AE%B5%E6%A0%91/" itemprop="url" rel="index"><span itemprop="name">线段树</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">Codeforces 242E</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="E-XOR-on-Segment"><a href="#E-XOR-on-Segment" class="headerlink" title="E. XOR on Segment"></a>E. XOR on Segment</h1><p>time limit per test:4 seconds<br>memory limit per test:256 megabytes<br>input:standard input<br>output:standard output</p>
+<p>You’ve got an array $a$, consisting of $n$ integers $a_1,a_2,…,a_n$. You are allowed to perform two operations on this array:</p>
+<ol>
+<li>Calculate the sum of current array elements on the segment $[l,r]$, that is, count value $a_l+a_{l+1}+…+a_r$.</li>
+<li>Apply the xor operation with a given number $x$ to each array element on the segment $[l,r]$, that is, execute $a_l=a_l \oplus x,a_{l+1} = a_{l+1} \oplus x,…,a_r=a_r\oplus x$. This operation changes exactly $r-l+1$ array elements.</li>
+</ol>
+<p>Expression $x\oplus y$ means applying bitwise xor operation to numbers $x$ and $y$. The given operation exists in all modern programming languages, for example in language C++ and Java it is marked as “^”, in Pascal — as “xor”.</p>
+<p>You’ve got a list of m operations of the indicated type. Your task is to perform all given operations, for each sum query you should print the result you get.</p>
+<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><p>The first line contains integer $n$ $(1≤n≤10^5)$ — the size of the array. The second line contains space-separated integers $a_1,a_2,…,a_n$ $(0≤a_i≤10^6)$ — the original array.</p>
+<p>The third line contains integer $m$ $(1≤m≤5·10^4)$ — the number of operations with the array. The $i$-th of the following $m$ lines first contains an integer $t_i$ $(1≤t_i≤2)$ — the type of the i-th query. If $t_i=1$, then this is the query of the sum, if $t_i=2$, then this is the query to change array elements. If the $i$-th operation is of type $1$, then next follow two integers $l_i,r_i$ $(1≤l_i≤r_i≤n)$. If the $i$-th operation is of type $2$, then next follow three integers $l_i,r_i,x_i$ $(1≤l_i≤r_i≤n,1≤x_i≤10^6)$. The numbers on the lines are separated by single spaces.</p>
+<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><p>For each query of type $1$ print in a single line the sum of numbers on the given segment. Print the answers to the queries in the order in which the queries go in the input.</p>
+<p>Please, do not use the %lld specifier to read or write 64-bit integers in С++. It is preferred to use the cin, cout streams, or the %I64d specifier.</p>
+<h2 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h2><table>
+<thead>
+<tr>
+<th>input</th>
+<th>output</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>5<br>4 10 3 13 7<br>8<br>1 2 4<br>2 1 3 3<br>1 2 4<br>1 3 3<br>2 2 5 5<br>1 1 5<br>2 1 2 10<br>1 2 3</td>
+<td>26<br>22<br>0<br>34<br>11</td>
+</tr>
+<tr>
+<td>6<br>4 7 4 0 7 3<br>5<br>2 2 3 8<br>1 1 5<br>2 3 5 1<br>2 4 5 6<br>1 2 3</td>
+<td>38<br>28</td>
+</tr>
+</tbody></table>
+<hr>
+<h1 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h1><p>由于 $x\leqslant10^6$，即 $x$ 不超过20位，可以每一位都开一个线段树，总共开二十个线段树。异或操作即是区间取反（$0$ 变成 $1$，$1$ 变成 $0$），询问操作转化为求区间$1$的个数。<br>如图，以样例1为例，竖着一个虚线框即开成一个线段树。</p>
+<p><img src="1.png"></p>
+<p>时间复杂度 $O(20\cdot n\log n)$</p>
+<hr>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># <span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="comment">//此处省了略 define 的一些东西和读入输出优化</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">100005</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, m, opt, ql, qr;</span><br><span class="line">LL a, qx, pow2[N];</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">SegmentTree</span>&#123;</span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">define</span> lid id&lt;&lt;1</span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">define</span> rid id&lt;&lt;1|1</span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">define</span> mid ((tr[num][id].l + tr[num][id].r) &gt;&gt; 1)</span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">define</span> len(id) (tr[num][id].r - tr[num][id].l + 1)</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">segTree</span>&#123;</span></span><br><span class="line">		<span class="keyword">int</span> l, r;</span><br><span class="line">		LL cnt;</span><br><span class="line">		<span class="keyword">bool</span> rev;</span><br><span class="line">	&#125;tr[<span class="number">25</span>][N&lt;&lt;<span class="number">2</span>];</span><br><span class="line">	<span class="function"><span class="keyword">inline</span> <span class="title">markRev</span><span class="params">(<span class="keyword">int</span> num, <span class="keyword">int</span> id)</span></span>&#123;</span><br><span class="line">		tr[num][id].rev ^= <span class="number">1</span>;</span><br><span class="line">		tr[num][id].cnt = <span class="built_in">len</span>(id) - tr[num][id].cnt;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">pushup</span><span class="params">(<span class="keyword">int</span> num, <span class="keyword">int</span> id)</span></span>&#123;</span><br><span class="line">		tr[num][id].cnt = tr[num][lid].cnt + tr[num][rid].cnt;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">pushdown</span><span class="params">(<span class="keyword">int</span> num, <span class="keyword">int</span> id)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(tr[num][id].l == tr[num][id].r)	<span class="keyword">return</span>;</span><br><span class="line">		<span class="keyword">if</span>(tr[num][id].rev)&#123;</span><br><span class="line">			<span class="built_in">markRev</span>(num, lid);</span><br><span class="line">			<span class="built_in">markRev</span>(num, rid);</span><br><span class="line">			tr[num][id].rev = <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">build</span><span class="params">(<span class="keyword">int</span> num, <span class="keyword">int</span> id, <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span></span>&#123;</span><br><span class="line">		tr[num][id].l = l, tr[num][id].r = r;</span><br><span class="line">		<span class="keyword">if</span>(l == r)	<span class="keyword">return</span>;</span><br><span class="line">		<span class="built_in">build</span>(num, lid, l, mid);</span><br><span class="line">		<span class="built_in">build</span>(num, rid, mid+<span class="number">1</span>, r);</span><br><span class="line">		<span class="built_in">pushup</span>(num, id);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function">LL <span class="title">query</span><span class="params">(<span class="keyword">int</span> num, <span class="keyword">int</span> id, <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span></span>&#123;</span><br><span class="line">		<span class="built_in">pushdown</span>(num, id);</span><br><span class="line">		<span class="keyword">if</span>(tr[num][id].l == l &amp;&amp; tr[num][id].r == r)</span><br><span class="line">			<span class="keyword">return</span> tr[num][id].cnt;</span><br><span class="line">		<span class="keyword">if</span>(r &lt;= mid)	<span class="keyword">return</span> <span class="built_in">query</span>(num, lid, l, r);</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(l &gt; mid)	<span class="keyword">return</span> <span class="built_in">query</span>(num, rid, l, r);</span><br><span class="line">		<span class="keyword">else</span>	<span class="keyword">return</span> <span class="built_in">query</span>(num, lid, l, mid) + <span class="built_in">query</span>(num, rid, mid+<span class="number">1</span>, r);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">change</span><span class="params">(<span class="keyword">int</span> num, <span class="keyword">int</span> id, <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span></span>&#123;</span><br><span class="line">		<span class="built_in">pushdown</span>(num, id);</span><br><span class="line">		<span class="keyword">if</span>(tr[num][id].l == l &amp;&amp; tr[num][id].r == r)&#123;</span><br><span class="line">			<span class="built_in">markRev</span>(num, id);</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(r &lt;= mid)	<span class="built_in">change</span>(num, lid, l, r);</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(l &gt; mid)	<span class="built_in">change</span>(num, rid, l, r);</span><br><span class="line">		<span class="keyword">else</span>	<span class="built_in">change</span>(num, lid, l, mid), <span class="built_in">change</span>(num, rid, mid+<span class="number">1</span>, r);</span><br><span class="line">		<span class="built_in">pushup</span>(num, id);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;seg;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	pow2[<span class="number">0</span>] = <span class="number">1</span>; <span class="built_in">fo1</span>(j, <span class="number">1</span>, <span class="number">20</span>)	pow2[j] = pow2[j<span class="number">-1</span>] * <span class="number">2</span>;</span><br><span class="line">	<span class="built_in">in</span>(n);</span><br><span class="line">	<span class="built_in">fo1</span>(j, <span class="number">0</span>, <span class="number">20</span>)	seg.<span class="built_in">build</span>(j, <span class="number">1</span>, <span class="number">1</span>, n);</span><br><span class="line">	<span class="built_in">fo1</span>(i, <span class="number">1</span>, n)&#123;</span><br><span class="line">		<span class="built_in">in</span>(a);</span><br><span class="line">		<span class="built_in">fo1</span>(j, <span class="number">0</span>, <span class="number">20</span>)</span><br><span class="line">			<span class="keyword">if</span>((a &gt;&gt; j) &amp; <span class="number">1</span> == <span class="number">1</span>)</span><br><span class="line">				seg.<span class="built_in">change</span>(j, <span class="number">1</span>, i, i);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">in</span>(m);</span><br><span class="line">	<span class="keyword">while</span>(m--)&#123;</span><br><span class="line">		<span class="built_in">in</span>(opt); <span class="built_in">in</span>(ql); <span class="built_in">in</span>(qr);</span><br><span class="line">		<span class="keyword">if</span>(opt == <span class="number">1</span>)&#123;</span><br><span class="line">			LL ans = <span class="number">0</span>;</span><br><span class="line">			<span class="built_in">fo1</span>(j, <span class="number">0</span>, <span class="number">20</span>)</span><br><span class="line">				ans += seg.<span class="built_in">query</span>(j, <span class="number">1</span>, ql, qr) * pow2[j];</span><br><span class="line">			<span class="built_in">outln</span>(ans);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span>&#123;</span><br><span class="line">			<span class="built_in">in</span>(qx);</span><br><span class="line">			<span class="built_in">fo1</span>(j, <span class="number">0</span>, <span class="number">20</span>)</span><br><span class="line">				<span class="keyword">if</span>((qx &gt;&gt; j) &amp; <span class="number">1</span> == <span class="number">1</span>)</span><br><span class="line">					seg.<span class="built_in">change</span>(j, <span class="number">1</span>, ql, qr);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/blog-oi/tags/Codeforces/" rel="tag"># Codeforces</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/blog-oi/2018/08/22/Codeforces-1006-F-Xor-Paths%EF%BC%88meet-in-the-middle%EF%BC%89/" rel="prev" title="[Codeforces 1006.F] Xor-Paths（meet in the middle）">
+                  <i class="fa fa-chevron-left"></i> [Codeforces 1006.F] Xor-Paths（meet in the middle）
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/blog-oi/2018/08/24/Codeforces-1017-D-The-Wu%EF%BC%88%E4%BD%8D%E8%BF%90%E7%AE%97%EF%BC%8Cmeet-in-the-middle%EF%BC%89/" rel="next" title="[Codeforces 1017.D] The Wu（位运算，meet in the middle）">
+                  [Codeforces 1017.D] The Wu（位运算，meet in the middle） <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xyfJASON</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/blog-oi/js/comments.js"></script><script src="/blog-oi/js/utils.js"></script><script src="/blog-oi/js/motion.js"></script><script src="/blog-oi/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/blog-oi/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/blog-oi/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

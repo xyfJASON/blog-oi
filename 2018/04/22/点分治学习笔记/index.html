@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog-oi/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog-oi/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog-oi/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/blog-oi/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/blog-oi/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"xyfjason.github.io","root":"/blog-oi/","images":"/blog-oi/images","scheme":"Gemini","darkmode":false,"version":"8.8.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/blog-oi/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/blog-oi/js/config.js"></script>
+<meta name="description" content="点分治学习笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="点分治学习笔记">
+<meta property="og:url" content="http://xyfjason.github.io/blog-oi/2018/04/22/%E7%82%B9%E5%88%86%E6%B2%BB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="xyfJASON">
+<meta property="og:description" content="点分治学习笔记">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://xyfjason.github.io/img/点分治.png">
+<meta property="article:published_time" content="2018-04-22T13:43:15.000Z">
+<meta property="article:modified_time" content="2021-11-23T02:03:47.709Z">
+<meta property="article:author" content="xyfJASON">
+<meta property="article:tag" content="学习笔记">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://xyfjason.github.io/img/点分治.png">
+
+
+<link rel="canonical" href="http://xyfjason.github.io/blog-oi/2018/04/22/%E7%82%B9%E5%88%86%E6%B2%BB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://xyfjason.github.io/blog-oi/2018/04/22/%E7%82%B9%E5%88%86%E6%B2%BB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/","path":"2018/04/22/点分治学习笔记/","title":"点分治学习笔记"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>点分治学习笔记 | xyfJASON</title>
+  
+
+  <script src="/blog-oi/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?f7e5c188ac0fc91848fb599cdef123bf"></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/blog-oi/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/blog-oi/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">xyfJASON</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">诗酒趁年华</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/blog-oi/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-about"><a href="/blog-oi/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+        <li class="menu-item menu-item-tags"><a href="/blog-oi/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/blog-oi/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/blog-oi/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A5%97%E8%B7%AF"><span class="nav-number">2.</span> <span class="nav-text">套路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0"><span class="nav-number">3.</span> <span class="nav-text">实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B1%82%E9%87%8D%E5%BF%83"><span class="nav-number">3.1.</span> <span class="nav-text">求重心</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E6%B2%BB%E8%AE%A1%E7%AE%97"><span class="nav-number">3.2.</span> <span class="nav-text">分治计算</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">4.</span> <span class="nav-text">注意事项</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%83%E4%B9%A0"><span class="nav-number">5.</span> <span class="nav-text">练习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#poj1741-tree"><span class="nav-number">5.1.</span> <span class="nav-text">poj1741 tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#luogu3806-%E3%80%90%E6%A8%A1%E6%9D%BF%E3%80%91%E7%82%B9%E5%88%86%E6%B2%BB1"><span class="nav-number">5.2.</span> <span class="nav-text">luogu3806 【模板】点分治1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BD%E5%AE%B6%E9%9B%86%E8%AE%AD%E9%98%9F-%E8%81%AA%E8%81%AA%E5%8F%AF%E5%8F%AF"><span class="nav-number">5.3.</span> <span class="nav-text">[国家集训队] 聪聪可可</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IOI-Race"><span class="nav-number">5.4.</span> <span class="nav-text">[IOI]Race</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">xyfJASON</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/blog-oi/archives/">
+          <span class="site-state-item-count">41</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/blog-oi/categories/">
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/blog-oi/tags/">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/xyfjason" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;xyfjason" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://309459245.lofter.com/" title="http:&#x2F;&#x2F;309459245.lofter.com&#x2F;" rel="noopener" target="_blank">yjq</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://mcfx.us/" title="https:&#x2F;&#x2F;mcfx.us&#x2F;" rel="noopener" target="_blank">mcfx</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.csdn.net/wxh010910" title="https:&#x2F;&#x2F;blog.csdn.net&#x2F;wxh010910" rel="noopener" target="_blank">wxh010910</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.csdn.net/yfzcsc" title="https:&#x2F;&#x2F;blog.csdn.net&#x2F;yfzcsc" rel="noopener" target="_blank">yfzcsc</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://owenowl.net/blogs/" title="http:&#x2F;&#x2F;owenowl.net&#x2F;blogs&#x2F;" rel="noopener" target="_blank">OwenOwl</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.csdn.net/OwenOwl" title="https:&#x2F;&#x2F;blog.csdn.net&#x2F;OwenOwl" rel="noopener" target="_blank">OwenOwl(CSDN)</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.csdn.net/Joker_69" title="https:&#x2F;&#x2F;blog.csdn.net&#x2F;Joker_69" rel="noopener" target="_blank">Joker</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://hzwer.com/" title="http:&#x2F;&#x2F;hzwer.com&#x2F;" rel="noopener" target="_blank">hzwer</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://ruanx.pw/" title="http:&#x2F;&#x2F;ruanx.pw" rel="noopener" target="_blank">ruanx</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/candy99/" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;candy99&#x2F;" rel="noopener" target="_blank">Candy?</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://oi.men.ci/#blog" title="https:&#x2F;&#x2F;oi.men.ci&#x2F;#blog" rel="noopener" target="_blank">Menci</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://rqy.moe/" title="https:&#x2F;&#x2F;rqy.moe&#x2F;" rel="noopener" target="_blank">_rqy</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://www.cnblogs.com/mlystdcall/" title="http:&#x2F;&#x2F;www.cnblogs.com&#x2F;mlystdcall&#x2F;" rel="noopener" target="_blank">__stdcall</a>
+        </li>
+    </ul>
+  </div>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+    
+    <div class="post-gallery-image">
+      <img src="/blog-oi/img/%E7%82%B9%E5%88%86%E6%B2%BB.png" itemprop="contentUrl">
+    </div>
+    </div>
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xyfjason.github.io/blog-oi/2018/04/22/%E7%82%B9%E5%88%86%E6%B2%BB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog-oi/images/avatar.gif">
+      <meta itemprop="name" content="xyfJASON">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xyfJASON">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          点分治学习笔记
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-04-22 21:43:15" itemprop="dateCreated datePublished" datetime="2018-04-22T21:43:15+08:00">2018-04-22</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-11-23 10:03:47" itemprop="dateModified" datetime="2021-11-23T10:03:47+08:00">2021-11-23</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/blog-oi/categories/%E5%9B%BE%E8%AE%BA/" itemprop="url" rel="index"><span itemprop="name">图论</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/blog-oi/categories/%E5%9B%BE%E8%AE%BA/%E6%A0%91/" itemprop="url" rel="index"><span itemprop="name">树</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/blog-oi/categories/%E5%9B%BE%E8%AE%BA/%E6%A0%91/%E7%82%B9%E5%88%86%E6%B2%BB/" itemprop="url" rel="index"><span itemprop="name">点分治</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">点分治学习笔记</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>点分治主要解决<strong>树上路径问题</strong>，其主要思想是把一颗有根树以根为分治点分为一个森林（其实就是各个子树），解决经过当前根的路径后在子树里继续分治，从而将问题“分而治之”。</p>
+<p>这里面，根的选择非常重要。为了保证复杂度，我们的分治点应该尽可能的“居中”，所以分治点一般选择正在处理的树的重心。</p>
+<hr>
+<h1 id="套路"><a href="#套路" class="headerlink" title="套路"></a>套路</h1><ol>
+<li>找到当前树的重心作为根</li>
+<li>解决通过这个根的路径的答案（一般有两种方法，一种是通过与子树容斥，一种是直接计算子树贡献）</li>
+<li>递归解决子树</li>
+</ol>
+<hr>
+<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><h2 id="求重心"><a href="#求重心" class="headerlink" title="求重心"></a>求重心</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//root = 0, mxson[0] = INF, sum = n;</span></span><br><span class="line"><span class="comment">//root = 0, mxson[0] = INF, sum = size[edge[i].to];</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">findRoot</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> f)</span></span>&#123;</span><br><span class="line">	size[x] = <span class="number">1</span>, mxson[x] = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = head[x]; i; i = edge[i].nxt)&#123;</span><br><span class="line">		<span class="keyword">if</span>(vis[edge[i].to] || edge[i].to == f)	<span class="keyword">continue</span>;</span><br><span class="line">		<span class="built_in">findRoot</span>(edge[i].to, x);</span><br><span class="line">		size[x] += size[edge[i].to];</span><br><span class="line">		mxson[x] = <span class="built_in">max</span>(mxson[x], size[edge[i].to]);</span><br><span class="line">	&#125;</span><br><span class="line">	mxson[x] = <span class="built_in">max</span>(mxson[x], sum - size[x]);</span><br><span class="line">	<span class="keyword">if</span>(mxson[x] &lt; mxson[root])	root = x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>size[]是子树大小，mxson[]是最大子树大小，root是重心，sum是当前整颗树的大小<br><strong>注意</strong>每次 findRoot() 前要初始化 root 和 sum</p>
+<h2 id="分治计算"><a href="#分治计算" class="headerlink" title="分治计算"></a>分治计算</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">	<span class="built_in">cal</span>(x);<span class="comment">//如果此处计算时将子树中一些不合法的路径的贡献也算进去了，那么需要容斥，即在下方*处减掉子树贡献；如果不容斥，就直接利用每颗子树的信息计算答案</span></span><br><span class="line">	vis[x] = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = head[x]; i; i = edge[i].nxt)&#123;</span><br><span class="line">		<span class="keyword">if</span>(vis[edge[i].to])	<span class="keyword">continue</span>;</span><br><span class="line">		<span class="built_in">cal</span>(edge[i].to);<span class="comment">//*</span></span><br><span class="line">		root = <span class="number">0</span>, sum = size[edge[i].to], mxson[<span class="number">0</span>] = INF;</span><br><span class="line">		<span class="built_in">findRoot</span>(edge[i].to, <span class="number">0</span>);</span><br><span class="line">		<span class="built_in">solve</span>(root);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>vis[]标记此点是否计算过，cal()计算以x为根、经过根的路径的答案</p>
+<hr>
+<h1 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h1><p>不要再分治时用memset O(n) 地进行初始化，否则点分治好不容易保证的复杂度就被毁了。</p>
+<hr>
+<h1 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h1><h2 id="poj1741-tree"><a href="#poj1741-tree" class="headerlink" title="poj1741 tree"></a>poj1741 tree</h2><p><strong>题意</strong><br>给一棵树，边有边权，问两点之间的距离小于等于K的点对有多少个。<br><strong>题解</strong><br>点分治时用容斥做：计算以x为根的子树时直接将求得的dis排序后O(n)求答案，然后再减去每个子树中被统计了的不合法答案<br><strong>Code</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># <span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> INF = <span class="number">1e9</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">10005</span>;</span><br><span class="line"><span class="keyword">int</span> n, k, u, v, p;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Edge</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> nxt, to, dis;</span><br><span class="line">&#125;edge[N&lt;&lt;<span class="number">1</span>];</span><br><span class="line"><span class="keyword">int</span> head[N], edgeNum;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">addEdge</span><span class="params">(<span class="keyword">int</span> from, <span class="keyword">int</span> to, <span class="keyword">int</span> dis)</span></span>&#123;</span><br><span class="line">	edge[++edgeNum].nxt = head[from];</span><br><span class="line">	edge[edgeNum].to = to;</span><br><span class="line">	edge[edgeNum].dis = dis;</span><br><span class="line">	head[from] = edgeNum;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">bool</span> vis[N];</span><br><span class="line"><span class="keyword">int</span> root, sum, size[N], mxson[N];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">findRoot</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> f)</span></span>&#123;</span><br><span class="line">	size[x] = <span class="number">1</span>, mxson[x] = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = head[x]; i; i = edge[i].nxt)&#123;</span><br><span class="line">		<span class="keyword">if</span>(edge[i].to == f || vis[edge[i].to])	<span class="keyword">continue</span>;</span><br><span class="line">		<span class="built_in">findRoot</span>(edge[i].to, x);</span><br><span class="line">		size[x] += size[edge[i].to];</span><br><span class="line">		mxson[x] = <span class="built_in">max</span>(mxson[x], size[edge[i].to]);</span><br><span class="line">	&#125;</span><br><span class="line">	mxson[x] = <span class="built_in">max</span>(mxson[x], sum - size[x]);</span><br><span class="line">	<span class="keyword">if</span>(mxson[x] &lt; mxson[root])	root = x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> dis[N], ans;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">getDis</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> f, <span class="keyword">int</span> d)</span></span>&#123;</span><br><span class="line">	dis[++dis[<span class="number">0</span>]] = d;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = head[x]; i; i = edge[i].nxt)&#123;</span><br><span class="line">		<span class="keyword">if</span>(edge[i].to == f || vis[edge[i].to])	<span class="keyword">continue</span>;</span><br><span class="line">		<span class="built_in">getDis</span>(edge[i].to, x, d + edge[i].dis);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">cal</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> d)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= dis[<span class="number">0</span>]; i++)	dis[i] = <span class="number">0</span>;</span><br><span class="line">	dis[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">	<span class="built_in">getDis</span>(x, <span class="number">0</span>, d);</span><br><span class="line">	<span class="built_in">sort</span>(dis+<span class="number">1</span>, dis+dis[<span class="number">0</span>]+<span class="number">1</span>);</span><br><span class="line">	<span class="keyword">int</span> l = <span class="number">1</span>, r = dis[<span class="number">0</span>];</span><br><span class="line">	<span class="keyword">while</span>(l &lt; r)&#123;</span><br><span class="line">		<span class="keyword">if</span>(dis[l] + dis[r] &lt;= k)	res += r - l, l++;</span><br><span class="line">		<span class="keyword">else</span>	r--;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">	ans += <span class="built_in">cal</span>(x, <span class="number">0</span>);</span><br><span class="line">	vis[x] = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = head[x]; i; i = edge[i].nxt)&#123;</span><br><span class="line">		<span class="keyword">if</span>(vis[edge[i].to])	<span class="keyword">continue</span>;</span><br><span class="line">		ans -= <span class="built_in">cal</span>(edge[i].to, edge[i].dis);</span><br><span class="line">		root = <span class="number">0</span>, mxson[<span class="number">0</span>] = INF, sum = size[edge[i].to];</span><br><span class="line">		<span class="built_in">findRoot</span>(edge[i].to, <span class="number">0</span>);</span><br><span class="line">		<span class="built_in">solve</span>(root);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">memset</span>(edge, <span class="number">0</span>, <span class="keyword">sizeof</span> edge);</span><br><span class="line">	<span class="built_in">memset</span>(head, <span class="number">0</span>, <span class="keyword">sizeof</span> head);</span><br><span class="line">	edgeNum = <span class="number">0</span>;</span><br><span class="line">	root = sum = ans = <span class="number">0</span>;</span><br><span class="line">	<span class="built_in">memset</span>(size, <span class="number">0</span>, <span class="keyword">sizeof</span> size);</span><br><span class="line">	<span class="built_in">memset</span>(mxson, <span class="number">0</span>, <span class="keyword">sizeof</span> mxson);</span><br><span class="line">	<span class="built_in">memset</span>(vis, <span class="number">0</span>, <span class="keyword">sizeof</span> vis);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;n, &amp;k);</span><br><span class="line">		<span class="keyword">if</span>(n == <span class="number">0</span> &amp;&amp; k == <span class="number">0</span>)	<span class="keyword">break</span>;</span><br><span class="line">		<span class="built_in">init</span>();</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++)&#123;</span><br><span class="line">			<span class="built_in">scanf</span>(<span class="string">&quot;%d%d%d&quot;</span>, &amp;u, &amp;v, &amp;p);</span><br><span class="line">			<span class="built_in">addEdge</span>(u, v, p);</span><br><span class="line">			<span class="built_in">addEdge</span>(v, u, p);</span><br><span class="line">		&#125;</span><br><span class="line">		sum = n, root = <span class="number">0</span>, mxson[<span class="number">0</span>] = INF;</span><br><span class="line">		<span class="built_in">findRoot</span>(<span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">		<span class="built_in">solve</span>(root);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, ans);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="luogu3806-【模板】点分治1"><a href="#luogu3806-【模板】点分治1" class="headerlink" title="luogu3806 【模板】点分治1"></a>luogu3806 【模板】点分治1</h2><p><strong>题意</strong><br>给定一棵有n个点的树，多次询问树上距离为k的点对是否存在。<br><strong>题解</strong><br>和上一题差不多，也是容斥，只不过我们把所有k的答案一次性求出来，每次询问O(1)回答。<br><strong>Code</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># <span class="meta-keyword">include</span><span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> INF = <span class="number">1e9</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">10005</span>;</span><br><span class="line"><span class="keyword">int</span> n, m, k[<span class="number">105</span>], u, v, p;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Edge</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> nxt, to, dis;</span><br><span class="line">&#125;edge[N&lt;&lt;<span class="number">1</span>];</span><br><span class="line"><span class="keyword">int</span> head[N], edgeNum;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">addEdge</span><span class="params">(<span class="keyword">int</span> from, <span class="keyword">int</span> to, <span class="keyword">int</span> dis)</span></span>&#123;</span><br><span class="line">	edge[++edgeNum].nxt = head[from];</span><br><span class="line">	edge[edgeNum].to = to;</span><br><span class="line">	edge[edgeNum].dis = dis;</span><br><span class="line">	head[from] = edgeNum;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> size[N], mxson[N], dis[N], root, sum;</span><br><span class="line"><span class="keyword">bool</span> vis[N];</span><br><span class="line">map&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; cnt;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">findRoot</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> f)</span></span>&#123;</span><br><span class="line">	size[x] = <span class="number">1</span>, mxson[x] = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = head[x]; i; i = edge[i].nxt)&#123;</span><br><span class="line">		<span class="keyword">if</span>(vis[edge[i].to] || edge[i].to == f)	<span class="keyword">continue</span>;</span><br><span class="line">		<span class="built_in">findRoot</span>(edge[i].to, x);</span><br><span class="line">		size[x] += size[edge[i].to];</span><br><span class="line">		mxson[x] = <span class="built_in">max</span>(mxson[x], size[edge[i].to]);</span><br><span class="line">	&#125;</span><br><span class="line">	mxson[x] = <span class="built_in">max</span>(mxson[x], sum - size[x]);</span><br><span class="line">	<span class="keyword">if</span>(mxson[x] &lt; mxson[root])	root = x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">getDis</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> f, <span class="keyword">int</span> d)</span></span>&#123;</span><br><span class="line">	dis[++dis[<span class="number">0</span>]] = d;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = head[x]; i; i = edge[i].nxt)&#123;</span><br><span class="line">		<span class="keyword">if</span>(edge[i].to == f || vis[edge[i].to])	<span class="keyword">continue</span>;</span><br><span class="line">		<span class="built_in">getDis</span>(edge[i].to, x, d + edge[i].dis);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">cal</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> d, <span class="keyword">int</span> fl)</span></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= dis[<span class="number">0</span>]; i++)	dis[i] = <span class="number">0</span>;</span><br><span class="line">	dis[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">	<span class="built_in">getDis</span>(x, <span class="number">0</span>, d);</span><br><span class="line">	<span class="built_in">sort</span>(dis+<span class="number">1</span>, dis+dis[<span class="number">0</span>]+<span class="number">1</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= dis[<span class="number">0</span>]; i++)&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= m; j++)&#123;</span><br><span class="line">			<span class="keyword">if</span>(dis[i] + dis[i] &gt; k[j])	<span class="keyword">continue</span>;</span><br><span class="line">			<span class="keyword">int</span> l = <span class="built_in">lower_bound</span>(dis+i, dis+dis[<span class="number">0</span>]+<span class="number">1</span>, k[j]-dis[i]) - dis;</span><br><span class="line">			<span class="keyword">if</span>(dis[l] + dis[i] != k[j])	<span class="keyword">continue</span>;</span><br><span class="line">			<span class="keyword">int</span> r = <span class="built_in">upper_bound</span>(dis+i, dis+dis[<span class="number">0</span>]+<span class="number">1</span>, k[j]-dis[i]) - dis;</span><br><span class="line">			cnt[k[j]] += (r - l) * fl;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">	<span class="built_in">cal</span>(x, <span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line">	vis[x] = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = head[x]; i; i = edge[i].nxt)&#123;</span><br><span class="line">		<span class="keyword">if</span>(vis[edge[i].to])	<span class="keyword">continue</span>;</span><br><span class="line">		<span class="built_in">cal</span>(edge[i].to, edge[i].dis, <span class="number">-1</span>);</span><br><span class="line">		root = <span class="number">0</span>, sum = size[edge[i].to], mxson[<span class="number">0</span>] = INF;</span><br><span class="line">		<span class="built_in">findRoot</span>(edge[i].to, <span class="number">0</span>);</span><br><span class="line">		<span class="built_in">solve</span>(root);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;n, &amp;m);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++)&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%d%d%d&quot;</span>, &amp;u, &amp;v, &amp;p);</span><br><span class="line">		<span class="built_in">addEdge</span>(u, v, p);</span><br><span class="line">		<span class="built_in">addEdge</span>(v, u, p);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; i++)</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;k[i]);</span><br><span class="line">	root = <span class="number">0</span>, sum = n, mxson[<span class="number">0</span>] = INF;</span><br><span class="line">	<span class="built_in">findRoot</span>(<span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">	<span class="built_in">solve</span>(root);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; i++)</span><br><span class="line">		<span class="built_in">puts</span>(cnt[k[i]] &gt; <span class="number">0</span> ? <span class="string">&quot;AYE&quot;</span> : <span class="string">&quot;NAY&quot;</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="国家集训队-聪聪可可"><a href="#国家集训队-聪聪可可" class="headerlink" title="[国家集训队] 聪聪可可"></a>[国家集训队] 聪聪可可</h2><p><strong>题意</strong><br>求边权和是3的倍数的点对个数<br><strong>题解</strong><br>思路和上面两道题大同小异，而且更简单了：不用对dis排序，只需记录下距当前根dis为0,1,2的点的个数(cnt)，则答案就是$cnt[0] * cnt[0] + cnt[1] * cnt[2] * 2$<br>当然这样做也要容斥<br><strong>Code</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># <span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">20005</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> INF = <span class="number">1e9</span>;</span><br><span class="line"><span class="keyword">int</span> n, u, v, p;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Edge</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> nxt, to, dis;</span><br><span class="line">&#125;edge[N&lt;&lt;<span class="number">1</span>];</span><br><span class="line"><span class="keyword">int</span> head[N], edgeNum;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">addEdge</span><span class="params">(<span class="keyword">int</span> from, <span class="keyword">int</span> to, <span class="keyword">int</span> dis)</span></span>&#123;</span><br><span class="line">	edge[++edgeNum].nxt = head[from];</span><br><span class="line">	edge[edgeNum].to = to;</span><br><span class="line">	edge[edgeNum].dis = dis;</span><br><span class="line">	head[from] = edgeNum;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> root, mxson[N], sum, size[N];</span><br><span class="line"><span class="keyword">bool</span> vis[N];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">findRoot</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> f)</span></span>&#123;</span><br><span class="line">	size[x] = <span class="number">1</span>, mxson[x] = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = head[x]; i; i = edge[i].nxt)&#123;</span><br><span class="line">		<span class="keyword">if</span>(vis[edge[i].to] || edge[i].to == f)	<span class="keyword">continue</span>;</span><br><span class="line">		<span class="built_in">findRoot</span>(edge[i].to, x);</span><br><span class="line">		size[x] += size[edge[i].to];</span><br><span class="line">		mxson[x] = <span class="built_in">max</span>(mxson[x], size[edge[i].to]);</span><br><span class="line">	&#125;</span><br><span class="line">	mxson[x] = <span class="built_in">max</span>(mxson[x], sum - size[x]);</span><br><span class="line">	<span class="keyword">if</span>(mxson[x] &lt; mxson[root])	root = x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> cnt[<span class="number">3</span>];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">getDis</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> f, <span class="keyword">int</span> d)</span></span>&#123;</span><br><span class="line">	cnt[d%<span class="number">3</span>]++;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = head[x]; i; i = edge[i].nxt)&#123;</span><br><span class="line">		<span class="keyword">if</span>(vis[edge[i].to] || edge[i].to == f)	<span class="keyword">continue</span>;</span><br><span class="line">		<span class="built_in">getDis</span>(edge[i].to, x, (d + edge[i].dis) % <span class="number">3</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">cal</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> d)</span></span>&#123;</span><br><span class="line">	cnt[<span class="number">0</span>] = cnt[<span class="number">1</span>] = cnt[<span class="number">2</span>] = <span class="number">0</span>;</span><br><span class="line">	<span class="built_in">getDis</span>(x, <span class="number">0</span>, d);</span><br><span class="line">	<span class="keyword">return</span> cnt[<span class="number">0</span>] * cnt[<span class="number">0</span>] + cnt[<span class="number">1</span>] * cnt[<span class="number">2</span>] * <span class="number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> ans;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">	ans += <span class="built_in">cal</span>(x, <span class="number">0</span>);</span><br><span class="line">	vis[x] = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = head[x]; i; i = edge[i].nxt)&#123;</span><br><span class="line">		<span class="keyword">if</span>(vis[edge[i].to])	<span class="keyword">continue</span>;</span><br><span class="line">		ans -= <span class="built_in">cal</span>(edge[i].to, edge[i].dis % <span class="number">3</span>);</span><br><span class="line">		root = <span class="number">0</span>, sum = size[edge[i].to], mxson[<span class="number">0</span>] = INF;</span><br><span class="line">		<span class="built_in">findRoot</span>(edge[i].to, <span class="number">0</span>);</span><br><span class="line">		<span class="built_in">solve</span>(root);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">gcd</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> b == <span class="number">0</span> ? a : <span class="built_in">gcd</span>(b, a % b);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++)&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%d%d%d&quot;</span>, &amp;u, &amp;v, &amp;p);</span><br><span class="line">		<span class="built_in">addEdge</span>(u, v, p % <span class="number">3</span>);</span><br><span class="line">		<span class="built_in">addEdge</span>(v, u, p % <span class="number">3</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	root = <span class="number">0</span>, mxson[<span class="number">0</span>] = INF, sum = n;</span><br><span class="line">	<span class="built_in">findRoot</span>(<span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">	<span class="built_in">solve</span>(root);</span><br><span class="line">	<span class="keyword">int</span> g = <span class="built_in">gcd</span>(ans, n*n);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d/%d&quot;</span>, ans / g,  n * n / g);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="IOI-Race"><a href="#IOI-Race" class="headerlink" title="[IOI]Race"></a>[IOI]Race</h2><p><strong>题意</strong><br>给一棵树，每条边有权。求一条简单路径，权值和等于 K ，且边的数量最小。输出最小边数<br><strong>题解</strong><br>发现这道不能容斥…所以我们想办法通过子树信息直接计算经过分治点的路径的答案<br>记$tmp[i]$为当前子树中，路径长为$i$的最小边数，于是对于当前根$x$，我们每次遍历它的子树，先用$tmp[]$和正在遍历的子树更新答案（代码中的 $updAns()$ 函数），再用正在遍历的这颗子树更新$tmp[]$（代码中的 $updTmp()$ 函数），这样就保证了不会把不合法的路径算进来<br><strong>Code</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># <span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> INF = <span class="number">1e9</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">200005</span>;</span><br><span class="line"><span class="keyword">int</span> n, k, u, v, p;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Edge</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> nxt, to, dis;</span><br><span class="line">&#125;edge[N&lt;&lt;<span class="number">1</span>];</span><br><span class="line"><span class="keyword">int</span> head[N], edgeNum;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">addEdge</span><span class="params">(<span class="keyword">int</span> from, <span class="keyword">int</span> to, <span class="keyword">int</span> dis)</span></span>&#123;</span><br><span class="line">	edge[++edgeNum].nxt = head[from];</span><br><span class="line">	edge[edgeNum].to = to;</span><br><span class="line">	edge[edgeNum].dis = dis;</span><br><span class="line">	head[from] = edgeNum;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> root, mxson[N], size[N], sum;</span><br><span class="line"><span class="keyword">bool</span> vis[N];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">findRoot</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> f)</span></span>&#123;</span><br><span class="line">	size[x] = <span class="number">1</span>, mxson[x] = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = head[x]; i; i = edge[i].nxt)&#123;</span><br><span class="line">		<span class="keyword">if</span>(vis[edge[i].to] || edge[i].to == f)	<span class="keyword">continue</span>;</span><br><span class="line">		<span class="built_in">findRoot</span>(edge[i].to, x);</span><br><span class="line">		size[x] += size[edge[i].to];</span><br><span class="line">		mxson[x] = <span class="built_in">max</span>(mxson[x], size[edge[i].to]);</span><br><span class="line">	&#125;</span><br><span class="line">	mxson[x] = <span class="built_in">max</span>(mxson[x], sum - size[x]);</span><br><span class="line">	<span class="keyword">if</span>(mxson[x] &lt; mxson[root])	root = x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> ans = INF, tmp[<span class="number">1000005</span>];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">updTmp</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> f, <span class="keyword">int</span> dis, <span class="keyword">int</span> d)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(dis &lt;= k)	tmp[dis] = <span class="built_in">min</span>(tmp[dis], d);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = head[x]; i; i = edge[i].nxt)&#123;</span><br><span class="line">		<span class="keyword">if</span>(vis[edge[i].to] || edge[i].to == f)	<span class="keyword">continue</span>;</span><br><span class="line">		<span class="built_in">updTmp</span>(edge[i].to, x, dis + edge[i].dis, d + <span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">updAns</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> f, <span class="keyword">int</span> dis, <span class="keyword">int</span> d)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(dis &lt;= k)	ans = <span class="built_in">min</span>(ans, d + tmp[k-dis]);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = head[x]; i; i = edge[i].nxt)&#123;</span><br><span class="line">		<span class="keyword">if</span>(vis[edge[i].to] || edge[i].to == f)	<span class="keyword">continue</span>;</span><br><span class="line">		<span class="built_in">updAns</span>(edge[i].to, x, dis + edge[i].dis, d + <span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">clearTmp</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> f, <span class="keyword">int</span> dis)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(dis &lt;= k)	tmp[dis] = INF;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = head[x]; i; i = edge[i].nxt)&#123;</span><br><span class="line">		<span class="keyword">if</span>(vis[edge[i].to] || edge[i].to == f)	<span class="keyword">continue</span>;</span><br><span class="line">		<span class="built_in">clearTmp</span>(edge[i].to, x, dis + edge[i].dis);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">	vis[x] = <span class="number">1</span>, tmp[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = head[x]; i; i = edge[i].nxt)&#123;</span><br><span class="line">		<span class="keyword">if</span>(vis[edge[i].to])	<span class="keyword">continue</span>;</span><br><span class="line">		<span class="built_in">updAns</span>(edge[i].to, x, edge[i].dis, <span class="number">1</span>);</span><br><span class="line">		<span class="built_in">updTmp</span>(edge[i].to, x, edge[i].dis, <span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = head[x]; i; i = edge[i].nxt)&#123;</span><br><span class="line">		<span class="keyword">if</span>(vis[edge[i].to])	<span class="keyword">continue</span>;</span><br><span class="line">		<span class="built_in">clearTmp</span>(edge[i].to, x, edge[i].dis);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = head[x]; i; i = edge[i].nxt)&#123;</span><br><span class="line">		<span class="keyword">if</span>(vis[edge[i].to])	<span class="keyword">continue</span>;</span><br><span class="line">		root = <span class="number">0</span>, sum = size[edge[i].to];</span><br><span class="line">		<span class="built_in">findRoot</span>(edge[i].to, <span class="number">0</span>);</span><br><span class="line">		<span class="built_in">solve</span>(root);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;n, &amp;k);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++)&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%d%d%d&quot;</span>, &amp;u, &amp;v, &amp;p);</span><br><span class="line">		<span class="built_in">addEdge</span>(u+<span class="number">1</span>, v+<span class="number">1</span>, p);</span><br><span class="line">		<span class="built_in">addEdge</span>(v+<span class="number">1</span>, u+<span class="number">1</span>, p);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= k; i++)	tmp[i] = INF;</span><br><span class="line">	root = <span class="number">0</span>, mxson[<span class="number">0</span>] = INF, sum = n;</span><br><span class="line">	<span class="built_in">findRoot</span>(<span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">	<span class="built_in">solve</span>(root);</span><br><span class="line">	<span class="keyword">if</span>(ans == INF)	<span class="built_in">puts</span>(<span class="string">&quot;-1&quot;</span>);</span><br><span class="line">	<span class="keyword">else</span>	<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, ans);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>—— 完 ——</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/blog-oi/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/blog-oi/2018/04/14/NOIP2017-D1-T2-%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%EF%BC%88%E6%A0%88%EF%BC%8C%E6%A8%A1%E6%8B%9F%EF%BC%89/" rel="prev" title="[NOIP2017 D1 T2]时间复杂度（栈，模拟）">
+                  <i class="fa fa-chevron-left"></i> [NOIP2017 D1 T2]时间复杂度（栈，模拟）
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/blog-oi/2018/04/28/SDOI2011-%E6%9F%93%E8%89%B2%EF%BC%88%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86%EF%BC%8C%E7%BA%BF%E6%AE%B5%E6%A0%91%EF%BC%89/" rel="next" title="[SDOI2011]染色（树链剖分，线段树）">
+                  [SDOI2011]染色（树链剖分，线段树） <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xyfJASON</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/blog-oi/js/comments.js"></script><script src="/blog-oi/js/utils.js"></script><script src="/blog-oi/js/motion.js"></script><script src="/blog-oi/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/blog-oi/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/blog-oi/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

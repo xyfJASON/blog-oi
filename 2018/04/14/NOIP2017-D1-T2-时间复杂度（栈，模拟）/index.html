@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog-oi/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog-oi/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog-oi/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/blog-oi/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/blog-oi/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"xyfjason.github.io","root":"/blog-oi/","images":"/blog-oi/images","scheme":"Gemini","darkmode":false,"version":"8.8.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/blog-oi/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/blog-oi/js/config.js"></script>
+<meta name="description" content="NOIP2017 Day1 T2 compexity">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[NOIP2017 D1 T2]时间复杂度（栈，模拟）">
+<meta property="og:url" content="http://xyfjason.github.io/blog-oi/2018/04/14/NOIP2017-D1-T2-%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%EF%BC%88%E6%A0%88%EF%BC%8C%E6%A8%A1%E6%8B%9F%EF%BC%89/index.html">
+<meta property="og:site_name" content="xyfJASON">
+<meta property="og:description" content="NOIP2017 Day1 T2 compexity">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-04-14T14:42:21.000Z">
+<meta property="article:modified_time" content="2021-11-23T02:03:47.688Z">
+<meta property="article:author" content="xyfJASON">
+<meta property="article:tag" content="NOIP">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://xyfjason.github.io/blog-oi/2018/04/14/NOIP2017-D1-T2-%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%EF%BC%88%E6%A0%88%EF%BC%8C%E6%A8%A1%E6%8B%9F%EF%BC%89/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://xyfjason.github.io/blog-oi/2018/04/14/NOIP2017-D1-T2-%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%EF%BC%88%E6%A0%88%EF%BC%8C%E6%A8%A1%E6%8B%9F%EF%BC%89/","path":"2018/04/14/NOIP2017-D1-T2-时间复杂度（栈，模拟）/","title":"[NOIP2017 D1 T2]时间复杂度（栈，模拟）"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>[NOIP2017 D1 T2]时间复杂度（栈，模拟） | xyfJASON</title>
+  
+
+  <script src="/blog-oi/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?f7e5c188ac0fc91848fb599cdef123bf"></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/blog-oi/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/blog-oi/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">xyfJASON</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">诗酒趁年华</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/blog-oi/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-about"><a href="/blog-oi/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+        <li class="menu-item menu-item-tags"><a href="/blog-oi/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/blog-oi/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/blog-oi/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.1.</span> <span class="nav-text">描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BE%93%E5%85%A5"><span class="nav-number">1.2.</span> <span class="nav-text">输入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BE%93%E5%87%BA"><span class="nav-number">1.3.</span> <span class="nav-text">输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%B7%E4%BE%8B%E8%BE%93%E5%85%A5"><span class="nav-number">1.4.</span> <span class="nav-text">样例输入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%B7%E4%BE%8B%E8%BE%93%E5%87%BA"><span class="nav-number">1.5.</span> <span class="nav-text">样例输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%A0%B7%E4%BE%8B%E8%A7%A3%E9%87%8A"><span class="nav-number">1.6.</span> <span class="nav-text">输入输出样例解释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E8%A7%84%E6%A8%A1%E4%B8%8E%E7%BA%A6%E5%AE%9A"><span class="nav-number">1.7.</span> <span class="nav-text">数据规模与约定</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF"><span class="nav-number">2.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Code"><span class="nav-number">3.</span> <span class="nav-text">Code</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">xyfJASON</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/blog-oi/archives/">
+          <span class="site-state-item-count">41</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/blog-oi/categories/">
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/blog-oi/tags/">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/xyfjason" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;xyfjason" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://309459245.lofter.com/" title="http:&#x2F;&#x2F;309459245.lofter.com&#x2F;" rel="noopener" target="_blank">yjq</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://mcfx.us/" title="https:&#x2F;&#x2F;mcfx.us&#x2F;" rel="noopener" target="_blank">mcfx</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.csdn.net/wxh010910" title="https:&#x2F;&#x2F;blog.csdn.net&#x2F;wxh010910" rel="noopener" target="_blank">wxh010910</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.csdn.net/yfzcsc" title="https:&#x2F;&#x2F;blog.csdn.net&#x2F;yfzcsc" rel="noopener" target="_blank">yfzcsc</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://owenowl.net/blogs/" title="http:&#x2F;&#x2F;owenowl.net&#x2F;blogs&#x2F;" rel="noopener" target="_blank">OwenOwl</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.csdn.net/OwenOwl" title="https:&#x2F;&#x2F;blog.csdn.net&#x2F;OwenOwl" rel="noopener" target="_blank">OwenOwl(CSDN)</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.csdn.net/Joker_69" title="https:&#x2F;&#x2F;blog.csdn.net&#x2F;Joker_69" rel="noopener" target="_blank">Joker</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://hzwer.com/" title="http:&#x2F;&#x2F;hzwer.com&#x2F;" rel="noopener" target="_blank">hzwer</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://ruanx.pw/" title="http:&#x2F;&#x2F;ruanx.pw" rel="noopener" target="_blank">ruanx</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/candy99/" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;candy99&#x2F;" rel="noopener" target="_blank">Candy?</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://oi.men.ci/#blog" title="https:&#x2F;&#x2F;oi.men.ci&#x2F;#blog" rel="noopener" target="_blank">Menci</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://rqy.moe/" title="https:&#x2F;&#x2F;rqy.moe&#x2F;" rel="noopener" target="_blank">_rqy</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://www.cnblogs.com/mlystdcall/" title="http:&#x2F;&#x2F;www.cnblogs.com&#x2F;mlystdcall&#x2F;" rel="noopener" target="_blank">__stdcall</a>
+        </li>
+    </ul>
+  </div>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xyfjason.github.io/blog-oi/2018/04/14/NOIP2017-D1-T2-%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%EF%BC%88%E6%A0%88%EF%BC%8C%E6%A8%A1%E6%8B%9F%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog-oi/images/avatar.gif">
+      <meta itemprop="name" content="xyfJASON">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xyfJASON">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [NOIP2017 D1 T2]时间复杂度（栈，模拟）
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-04-14 22:42:21" itemprop="dateCreated datePublished" datetime="2018-04-14T22:42:21+08:00">2018-04-14</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-11-23 10:03:47" itemprop="dateModified" datetime="2021-11-23T10:03:47+08:00">2021-11-23</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/blog-oi/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">数据结构</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/blog-oi/categories/%E6%A8%A1%E6%8B%9F/" itemprop="url" rel="index"><span itemprop="name">模拟</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/blog-oi/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%88/" itemprop="url" rel="index"><span itemprop="name">栈</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">NOIP2017 Day1 T2 compexity</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><h2 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h2><p>小明正在学习一种新的编程语言 A++，刚学会循环语句的他激动地写了好多程序并 给出了他自己算出的时间复杂度，<span id="more"></span>可他的编程老师实在不想一个一个检查小明的程序， 于是你的机会来啦！下面请你编写程序来判断小明对他的每个程序给出的时间复杂度是否正确。</p>
+<p>A++语言的循环结构如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">F i x y</span><br><span class="line">	循环体</span><br><span class="line">E</span><br></pre></td></tr></table></figure>
+<p>其中F i x y表示新建变量 $i$（变量 $i$ 不可与未被销毁的变量重名）并初始化为 $x$， 然后判断 $i$ 和 $y$ 的大小关系，若 $i$ 小于等于 $y$ 则进入循环，否则不进入。每次循环结束后 $i$ 都会被修改成 $i +1$，一旦 $i$ 大于 $y$ 终止循环。</p>
+<p>$x$ 和 $y$ 可以是正整数（$x$ 和 $y$ 的大小关系不定）或变量 $n$。$n$ 是一个表示数据规模的变量，在时间复杂度计算中需保留该变量而不能将其视为常数，该数远大于 100。</p>
+<p>“E”表示循环体结束。循环体结束时，这个循环体新建的变量也被销毁。</p>
+<p>注：本题中为了书写方便，在描述复杂度时，使用大写英文字母“O”表示通常意义下“Θ”的概念。</p>
+<h2 id="输入"><a href="#输入" class="headerlink" title="输入"></a>输入</h2><p>输入文件第一行一个正整数 $t$，表示有 $t$（$t \le 10$）个程序需要计算时间复杂度。 每个程序我们只需抽取其中 F i x y和E即可计算时间复杂度。注意：循环结构允许嵌套。</p>
+<p>接下来每个程序的第一行包含一个正整数 $L$ 和一个字符串，$L$ 代表程序行数，字符串表示这个程序的复杂度，O(1)表示常数复杂度，O(n^w)表示复杂度为$n^w$，其中w是一个小于100的正整数（输入中不包含引号），输入保证复杂度只有O(1)和O(n^w) 两种类型。</p>
+<p>接下来 $L$ 行代表程序中循环结构中的F i x y或者 E。 程序行若以F开头，表示进入一个循环，之后有空格分离的三个字符（串）i x y， 其中 $i$ 是一个小写字母（保证不为$n$），表示新建的变量名，$x$ 和 $y$ 可能是正整数或 $n$ ，已知若为正整数则一定小于 100。</p>
+<p>程序行若以E开头，则表示循环体结束。</p>
+<h2 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h2><p>输出文件共 $t$ 行，对应输入的 $t$ 个程序，每行输出”Yes”或”No”或者”ERR”（输出中不包含引号），若程序实际复杂度与输入给出的复杂度一致则输出”Yes”，不一致则输出”No”，若程序有语法错误（其中语法错误只有: ① F 和 E 不匹配 ②新建的变量与已经存在但未被销毁的变量重复两种情况），则输出”ERR” 。</p>
+<p>注意：即使在程序不会执行的循环体中出现了语法错误也会编译错误，要输出 ERR。</p>
+<h2 id="样例输入"><a href="#样例输入" class="headerlink" title="样例输入"></a>样例输入</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">8</span><br><span class="line">2 O(1)</span><br><span class="line">F i 1 1</span><br><span class="line">E</span><br><span class="line">2 O(n^1)</span><br><span class="line">F x 1 n</span><br><span class="line">E</span><br><span class="line">1 O(1)</span><br><span class="line">F x 1 n</span><br><span class="line">4 O(n^2)</span><br><span class="line">F x 5 n</span><br><span class="line">F y 10 n</span><br><span class="line">E</span><br><span class="line">E</span><br><span class="line">4 O(n^2)</span><br><span class="line">F x 9 n</span><br><span class="line">E</span><br><span class="line">F y 2 n</span><br><span class="line">E</span><br><span class="line">4 O(n^1)</span><br><span class="line">F x 9 n</span><br><span class="line">F y n 4</span><br><span class="line">E</span><br><span class="line">E</span><br><span class="line">4 O(1)</span><br><span class="line">F y n 4</span><br><span class="line">F x 9 n</span><br><span class="line">E</span><br><span class="line">E</span><br><span class="line">4 O(n^2)</span><br><span class="line">F x 1 n</span><br><span class="line">F x 1 10</span><br><span class="line">E</span><br><span class="line">E</span><br></pre></td></tr></table></figure>
+<h2 id="样例输出"><a href="#样例输出" class="headerlink" title="样例输出"></a>样例输出</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Yes</span><br><span class="line">Yes</span><br><span class="line">ERR</span><br><span class="line">Yes</span><br><span class="line">No</span><br><span class="line">Yes</span><br><span class="line">Yes</span><br><span class="line">ERR</span><br></pre></td></tr></table></figure>
+<h2 id="输入输出样例解释"><a href="#输入输出样例解释" class="headerlink" title="输入输出样例解释"></a>输入输出样例解释</h2><p>第一个程序 $i$ 从 1 到 1 是常数复杂度。<br>第二个程序 $x$ 从 1 到 $n$ 是 $n$ 的一次方的复杂度。<br>第三个程序有一个 F 开启循环却没有 E 结束，语法错误。<br>第四个程序二重循环，$n$ 的平方的复杂度。<br>第五个程序两个一重循环，$n$ 的一次方的复杂度。<br>第六个程序第一重循环正常，但第二重循环开始即终止（因为$n$远大于100，100大于4）。<br>第七个程序第一重循环无法进入，故为常数复杂度。<br>第八个程序第二重循环中的变量 $x$ 与第一重循环中的变量重复，出现语法错误②，输出 ERR。</p>
+<h2 id="数据规模与约定"><a href="#数据规模与约定" class="headerlink" title="数据规模与约定"></a>数据规模与约定</h2><p>对于 30%的数据：不存在语法错误，数据保证小明给出的每个程序的前 $L/2$ 行一定为以 F 开头的语句，第 $L/2+1$ 行至第 $L$ 行一定为以 $E$ 开头的语句，$L \le 10$，若 $x$、$y$ 均 为整数，$x$ 一定小于 $y$，且只有 $y$ 有可能为 $n$。<br>对于 50%的数据：不存在语法错误，$L \le 100$，且若 $x$、$y$ 均为整数，$x$ 一定小于 $y$， 且只有 $y$ 有可能为 $n$。<br>对于 70%的数据：不存在语法错误，$L \le 100$。<br>对于 100%的数据：$L \le 100$。</p>
+<hr>
+<h1 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h1><p>由于循环必须要让F与E配对，联想到括号匹配问题，所以用栈来模拟。<br>为了方便计算，我在栈里维护了三个值，分别表示当前循环所用变量名、程序执行到当前循环时的复杂度、当前循环是否处于被跳过的循环之中（即程序不会执行到）。在压栈时维护一下这三个值就好了，最后的复杂度即为最大的可被执行到的复杂度。<br>最后，注意一下关于字符串的读入处理就好了。</p>
+<hr>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># <span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> T, L, kind, w;<span class="comment">//kind == 1:O(1); kind == 2: O(n^w)</span></span><br><span class="line"><span class="keyword">int</span> top, ans;</span><br><span class="line"><span class="keyword">char</span> com[<span class="number">100</span>], opt[<span class="number">100</span>];</span><br><span class="line"><span class="keyword">bool</span> used[<span class="number">1000</span>], err;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span>&#123;</span></span><br><span class="line">	<span class="keyword">char</span> ch;</span><br><span class="line">	<span class="keyword">int</span> c;<span class="comment">//执行至此的时间复杂度 </span></span><br><span class="line">	<span class="keyword">bool</span> dir;<span class="comment">//是否处于直接跳过的循环中 </span></span><br><span class="line">&#125;sta[<span class="number">1000</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d &quot;</span>, &amp;L);</span><br><span class="line">	cin.<span class="built_in">getline</span>(com, <span class="number">99</span>);</span><br><span class="line">	<span class="keyword">if</span>(com[<span class="number">2</span>] == <span class="string">&#x27;1&#x27;</span>)	kind = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">else</span>&#123;</span><br><span class="line">		<span class="keyword">int</span> now = <span class="number">4</span>;</span><br><span class="line">		<span class="keyword">while</span>(com[now] &gt;= <span class="string">&#x27;0&#x27;</span> &amp;&amp; com[now] &lt;= <span class="string">&#x27;9&#x27;</span>)&#123;</span><br><span class="line">			w = w * <span class="number">10</span> + com[now] - <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">			now++;</span><br><span class="line">		&#125;</span><br><span class="line">		kind = <span class="number">2</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= L; i++)&#123;</span><br><span class="line">		cin.<span class="built_in">getline</span>(opt, <span class="number">99</span>);</span><br><span class="line">		<span class="keyword">if</span>(err)	<span class="keyword">continue</span>;</span><br><span class="line">		<span class="keyword">if</span>(opt[<span class="number">0</span>] == <span class="string">&#x27;F&#x27;</span>)&#123;</span><br><span class="line">			<span class="keyword">if</span>(used[opt[<span class="number">2</span>]])&#123; err = <span class="number">1</span>; <span class="keyword">continue</span>; &#125;</span><br><span class="line">			used[opt[<span class="number">2</span>]] = <span class="number">1</span>;</span><br><span class="line">			<span class="keyword">int</span> now = <span class="number">4</span>, l = <span class="number">0</span>, r = <span class="number">0</span>, pre = <span class="number">0</span>, nxt = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">while</span>((opt[now] &gt;= <span class="string">&#x27;0&#x27;</span> &amp;&amp; opt[now] &lt;= <span class="string">&#x27;9&#x27;</span>) || opt[now] == <span class="string">&#x27;n&#x27;</span>)&#123;</span><br><span class="line">				<span class="keyword">if</span>(opt[now] == <span class="string">&#x27;n&#x27;</span>)	pre = <span class="number">1</span>;</span><br><span class="line">				<span class="keyword">else</span>	l = l * <span class="number">10</span> + opt[now] - <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">				now++;</span><br><span class="line">			&#125;</span><br><span class="line">			now++;</span><br><span class="line">			<span class="keyword">while</span>((opt[now] &gt;= <span class="string">&#x27;0&#x27;</span> &amp;&amp; opt[now] &lt;= <span class="string">&#x27;9&#x27;</span>) || (opt[now] == <span class="string">&#x27;n&#x27;</span>))&#123;</span><br><span class="line">				<span class="keyword">if</span>(opt[now] == <span class="string">&#x27;n&#x27;</span>)	nxt = <span class="number">1</span>;</span><br><span class="line">				<span class="keyword">else</span>	r = r * <span class="number">10</span> + opt[now] - <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">				now++;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span>(pre == <span class="number">1</span> &amp;&amp; nxt == <span class="number">1</span>)&#123;</span><br><span class="line">				sta[top+<span class="number">1</span>] = (Node)&#123;opt[<span class="number">2</span>], sta[top].c, sta[top].dir&#125;;</span><br><span class="line">				top++;</span><br><span class="line">				<span class="keyword">if</span>(sta[top].dir == <span class="number">0</span>)	ans = <span class="built_in">max</span>(ans, sta[top].c);</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span>(pre == <span class="number">1</span> &amp;&amp; nxt == <span class="number">0</span>)&#123;</span><br><span class="line">				sta[top+<span class="number">1</span>] = (Node)&#123;opt[<span class="number">2</span>], sta[top].c, <span class="number">1</span>&#125;;</span><br><span class="line">				top++;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span>(pre == <span class="number">0</span> &amp;&amp; nxt == <span class="number">1</span>)&#123;</span><br><span class="line">				sta[top+<span class="number">1</span>] = (Node)&#123;opt[<span class="number">2</span>], sta[top].c + <span class="number">1</span>, sta[top].dir&#125;;</span><br><span class="line">				top++;</span><br><span class="line">				<span class="keyword">if</span>(sta[top].dir == <span class="number">0</span>)	ans = <span class="built_in">max</span>(ans, sta[top].c);</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span>(pre == <span class="number">0</span> &amp;&amp; nxt == <span class="number">0</span>)&#123;</span><br><span class="line">				<span class="keyword">if</span>(l &lt;= r)&#123;</span><br><span class="line">					sta[top+<span class="number">1</span>] = (Node)&#123;opt[<span class="number">2</span>], sta[top].c, sta[top].dir&#125;;</span><br><span class="line">					top++;</span><br><span class="line">					<span class="keyword">if</span>(sta[top].dir == <span class="number">0</span>)	ans = <span class="built_in">max</span>(ans, sta[top].c);</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">else</span>&#123;</span><br><span class="line">					sta[top+<span class="number">1</span>] = (Node)&#123;opt[<span class="number">2</span>], sta[top].c, <span class="number">1</span>&#125;;</span><br><span class="line">					top++;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(opt[<span class="number">0</span>] == <span class="string">&#x27;E&#x27;</span>)&#123;</span><br><span class="line">			<span class="keyword">if</span>(top == <span class="number">0</span>)	err = <span class="number">1</span>;</span><br><span class="line">			<span class="keyword">else</span>&#123;</span><br><span class="line">				used[sta[top].ch] = <span class="number">0</span>;</span><br><span class="line">				top--;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(top)	err = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">if</span>(err)&#123; <span class="built_in">puts</span>(<span class="string">&quot;ERR&quot;</span>); <span class="keyword">return</span>; &#125;</span><br><span class="line">	<span class="keyword">if</span>(kind == <span class="number">1</span> &amp;&amp; ans == <span class="number">0</span>)&#123; <span class="built_in">puts</span>(<span class="string">&quot;Yes&quot;</span>); <span class="keyword">return</span>; &#125;</span><br><span class="line">	<span class="keyword">if</span>(kind == <span class="number">2</span> &amp;&amp; w == ans)&#123; <span class="built_in">puts</span>(<span class="string">&quot;Yes&quot;</span>); <span class="keyword">return</span>; &#125;</span><br><span class="line">	<span class="built_in">puts</span>(<span class="string">&quot;No&quot;</span>); <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">memset</span>(sta, <span class="number">0</span>, <span class="keyword">sizeof</span> sta); top = <span class="number">0</span>;</span><br><span class="line">	<span class="built_in">memset</span>(com, <span class="number">0</span>, <span class="keyword">sizeof</span> com);</span><br><span class="line">	<span class="built_in">memset</span>(opt, <span class="number">0</span>, <span class="keyword">sizeof</span> opt);</span><br><span class="line">	<span class="built_in">memset</span>(used, <span class="number">0</span>, <span class="keyword">sizeof</span> used);</span><br><span class="line">	err = <span class="number">0</span>;</span><br><span class="line">	ans = <span class="number">0</span>;</span><br><span class="line">	kind = w = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;T);</span><br><span class="line">	<span class="keyword">while</span>(T--)&#123;</span><br><span class="line">		<span class="built_in">init</span>();</span><br><span class="line">		<span class="built_in">solve</span>();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/blog-oi/tags/NOIP/" rel="tag"># NOIP</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/blog-oi/2018/04/14/NOIP2017-D1-T1-%E5%B0%8F%E5%87%AF%E7%9A%84%E7%96%91%E6%83%91%EF%BC%88%E6%95%B0%E8%AE%BA%EF%BC%89/" rel="prev" title="[NOIP2017 D1 T1]小凯的疑惑（数论）">
+                  <i class="fa fa-chevron-left"></i> [NOIP2017 D1 T1]小凯的疑惑（数论）
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/blog-oi/2018/04/22/%E7%82%B9%E5%88%86%E6%B2%BB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="next" title="点分治学习笔记">
+                  点分治学习笔记 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xyfJASON</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/blog-oi/js/comments.js"></script><script src="/blog-oi/js/utils.js"></script><script src="/blog-oi/js/motion.js"></script><script src="/blog-oi/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/blog-oi/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/blog-oi/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

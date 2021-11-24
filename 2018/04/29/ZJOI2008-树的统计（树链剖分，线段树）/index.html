@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog-oi/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog-oi/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog-oi/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/blog-oi/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/blog-oi/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"xyfjason.github.io","root":"/blog-oi/","images":"/blog-oi/images","scheme":"Gemini","darkmode":false,"version":"8.8.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/blog-oi/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/blog-oi/js/config.js"></script>
+<meta name="description" content="ZJOI2008">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[ZJOI2008]树的统计（树链剖分，线段树）">
+<meta property="og:url" content="http://xyfjason.github.io/blog-oi/2018/04/29/ZJOI2008-%E6%A0%91%E7%9A%84%E7%BB%9F%E8%AE%A1%EF%BC%88%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86%EF%BC%8C%E7%BA%BF%E6%AE%B5%E6%A0%91%EF%BC%89/index.html">
+<meta property="og:site_name" content="xyfJASON">
+<meta property="og:description" content="ZJOI2008">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-04-29T05:57:26.000Z">
+<meta property="article:modified_time" content="2021-11-23T02:03:47.763Z">
+<meta property="article:author" content="xyfJASON">
+<meta property="article:tag" content="ZJOI">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://xyfjason.github.io/blog-oi/2018/04/29/ZJOI2008-%E6%A0%91%E7%9A%84%E7%BB%9F%E8%AE%A1%EF%BC%88%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86%EF%BC%8C%E7%BA%BF%E6%AE%B5%E6%A0%91%EF%BC%89/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://xyfjason.github.io/blog-oi/2018/04/29/ZJOI2008-%E6%A0%91%E7%9A%84%E7%BB%9F%E8%AE%A1%EF%BC%88%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86%EF%BC%8C%E7%BA%BF%E6%AE%B5%E6%A0%91%EF%BC%89/","path":"2018/04/29/ZJOI2008-树的统计（树链剖分，线段树）/","title":"[ZJOI2008]树的统计（树链剖分，线段树）"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>[ZJOI2008]树的统计（树链剖分，线段树） | xyfJASON</title>
+  
+
+  <script src="/blog-oi/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?f7e5c188ac0fc91848fb599cdef123bf"></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/blog-oi/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/blog-oi/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">xyfJASON</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">诗酒趁年华</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/blog-oi/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-about"><a href="/blog-oi/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+        <li class="menu-item menu-item-tags"><a href="/blog-oi/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/blog-oi/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/blog-oi/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.1.</span> <span class="nav-text">描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BE%93%E5%85%A5%E6%A0%BC%E5%BC%8F"><span class="nav-number">1.2.</span> <span class="nav-text">输入格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F"><span class="nav-number">1.3.</span> <span class="nav-text">输出格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BE%93%E5%85%A5%E6%A0%B7%E4%BE%8B"><span class="nav-number">1.4.</span> <span class="nav-text">输入样例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BE%93%E5%87%BA%E6%A0%B7%E4%BE%8B"><span class="nav-number">1.5.</span> <span class="nav-text">输出样例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%B4%E6%98%8E"><span class="nav-number">1.6.</span> <span class="nav-text">说明</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF"><span class="nav-number">2.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Code"><span class="nav-number">3.</span> <span class="nav-text">Code</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">xyfJASON</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/blog-oi/archives/">
+          <span class="site-state-item-count">41</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/blog-oi/categories/">
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/blog-oi/tags/">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/xyfjason" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;xyfjason" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://309459245.lofter.com/" title="http:&#x2F;&#x2F;309459245.lofter.com&#x2F;" rel="noopener" target="_blank">yjq</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://mcfx.us/" title="https:&#x2F;&#x2F;mcfx.us&#x2F;" rel="noopener" target="_blank">mcfx</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.csdn.net/wxh010910" title="https:&#x2F;&#x2F;blog.csdn.net&#x2F;wxh010910" rel="noopener" target="_blank">wxh010910</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.csdn.net/yfzcsc" title="https:&#x2F;&#x2F;blog.csdn.net&#x2F;yfzcsc" rel="noopener" target="_blank">yfzcsc</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://owenowl.net/blogs/" title="http:&#x2F;&#x2F;owenowl.net&#x2F;blogs&#x2F;" rel="noopener" target="_blank">OwenOwl</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.csdn.net/OwenOwl" title="https:&#x2F;&#x2F;blog.csdn.net&#x2F;OwenOwl" rel="noopener" target="_blank">OwenOwl(CSDN)</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.csdn.net/Joker_69" title="https:&#x2F;&#x2F;blog.csdn.net&#x2F;Joker_69" rel="noopener" target="_blank">Joker</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://hzwer.com/" title="http:&#x2F;&#x2F;hzwer.com&#x2F;" rel="noopener" target="_blank">hzwer</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://ruanx.pw/" title="http:&#x2F;&#x2F;ruanx.pw" rel="noopener" target="_blank">ruanx</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/candy99/" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;candy99&#x2F;" rel="noopener" target="_blank">Candy?</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://oi.men.ci/#blog" title="https:&#x2F;&#x2F;oi.men.ci&#x2F;#blog" rel="noopener" target="_blank">Menci</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://rqy.moe/" title="https:&#x2F;&#x2F;rqy.moe&#x2F;" rel="noopener" target="_blank">_rqy</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://www.cnblogs.com/mlystdcall/" title="http:&#x2F;&#x2F;www.cnblogs.com&#x2F;mlystdcall&#x2F;" rel="noopener" target="_blank">__stdcall</a>
+        </li>
+    </ul>
+  </div>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xyfjason.github.io/blog-oi/2018/04/29/ZJOI2008-%E6%A0%91%E7%9A%84%E7%BB%9F%E8%AE%A1%EF%BC%88%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86%EF%BC%8C%E7%BA%BF%E6%AE%B5%E6%A0%91%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog-oi/images/avatar.gif">
+      <meta itemprop="name" content="xyfJASON">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xyfJASON">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [ZJOI2008]树的统计（树链剖分，线段树）
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-04-29 13:57:26" itemprop="dateCreated datePublished" datetime="2018-04-29T13:57:26+08:00">2018-04-29</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-11-23 10:03:47" itemprop="dateModified" datetime="2021-11-23T10:03:47+08:00">2021-11-23</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/blog-oi/categories/%E5%9B%BE%E8%AE%BA/" itemprop="url" rel="index"><span itemprop="name">图论</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/blog-oi/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">数据结构</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/blog-oi/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%BA%BF%E6%AE%B5%E6%A0%91/" itemprop="url" rel="index"><span itemprop="name">线段树</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/blog-oi/categories/%E5%9B%BE%E8%AE%BA/%E6%A0%91/" itemprop="url" rel="index"><span itemprop="name">树</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/blog-oi/categories/%E5%9B%BE%E8%AE%BA/%E6%A0%91/%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86/" itemprop="url" rel="index"><span itemprop="name">树链剖分</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">ZJOI2008</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><h2 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h2><p>一棵树上有n个节点，编号分别为1到n，每个节点都有一个权值w。<br>我们将以下面的形式来要求你对这棵树完成一些操作：<br>I. CHANGE u t : 把结点u的权值改为t<br>II. QMAX u v: 询问从点u到点v的路径上的节点的最大权值<br>III. QSUM u v: 询问从点u到点v的路径上的节点的权值和<br>注意：从点u到点v的路径上的节点包括u和v本身</p>
+<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>输入文件的第一行为一个整数n，表示节点的个数。<br>接下来n – 1行，每行2个整数a和b，表示节点a和节点b之间有一条边相连。<br>接下来一行n个整数，第i个整数wi表示节点i的权值。<br>接下来1行，为一个整数q，表示操作的总数。<br>接下来q行，每行一个操作，以“CHANGE u t”或者“QMAX u v”或者“QSUM u v”的形式给出。</p>
+<h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>对于每个“QMAX”或者“QSUM”的操作，每行输出一个整数表示要求输出的结果。</p>
+<h2 id="输入样例"><a href="#输入样例" class="headerlink" title="输入样例"></a>输入样例</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">4</span><br><span class="line">1 2</span><br><span class="line">2 3</span><br><span class="line">4 1</span><br><span class="line">4 2 1 3</span><br><span class="line">12</span><br><span class="line">QMAX 3 4</span><br><span class="line">QMAX 3 3</span><br><span class="line">QMAX 3 2</span><br><span class="line">QMAX 2 3</span><br><span class="line">QSUM 3 4</span><br><span class="line">QSUM 2 1</span><br><span class="line">CHANGE 1 5</span><br><span class="line">QMAX 3 4</span><br><span class="line">CHANGE 3 6</span><br><span class="line">QMAX 3 4</span><br><span class="line">QMAX 2 4</span><br><span class="line">QSUM 3 4</span><br></pre></td></tr></table></figure>
+<h2 id="输出样例"><a href="#输出样例" class="headerlink" title="输出样例"></a>输出样例</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">4</span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">2</span><br><span class="line">10</span><br><span class="line">6</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">5</span><br><span class="line">16</span><br></pre></td></tr></table></figure>
+<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>对于100％的数据，保证$1 \leq n \leq 30000，0 \leq q \leq 200000$；中途操作中保证每个节点的权值w在$-30000$到$30000$之间。</p>
+<hr>
+<h1 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h1><p>这是一道树链剖分的模板题了。<br>注意权值有可能为负数，所以求最大值时要<strong>初始化为-INF</strong></p>
+<p>复杂度$O(n \log ^2n)$</p>
+<hr>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># <span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> LL;</span><br><span class="line"><span class="keyword">const</span> LL INF = <span class="number">1e16</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">30005</span>;</span><br><span class="line"><span class="keyword">int</span> n, u, v, q;</span><br><span class="line"><span class="keyword">char</span> opt[<span class="number">10</span>];</span><br><span class="line">LL a[N];</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Edge</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> nxt, to;</span><br><span class="line">&#125;edge[N&lt;&lt;<span class="number">1</span>];</span><br><span class="line"><span class="keyword">int</span> head[N], edgeNum;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">addEdge</span><span class="params">(<span class="keyword">int</span> from, <span class="keyword">int</span> to)</span></span>&#123;</span><br><span class="line">	edge[++edgeNum].nxt = head[from];</span><br><span class="line">	edge[edgeNum].to = to;</span><br><span class="line">	head[from] = edgeNum;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> size[N], fa[N], dep[N], son[N];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs1</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> f, <span class="keyword">int</span> depth)</span></span>&#123;</span><br><span class="line">	size[x] = <span class="number">1</span>, fa[x] = f, dep[x] = depth, son[x] = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = head[x]; i; i = edge[i].nxt)&#123;</span><br><span class="line">		<span class="keyword">if</span>(edge[i].to == f)	<span class="keyword">continue</span>;</span><br><span class="line">		<span class="built_in">dfs1</span>(edge[i].to, x, depth+<span class="number">1</span>);</span><br><span class="line">		size[x] += size[edge[i].to];</span><br><span class="line">		<span class="keyword">if</span>(size[edge[i].to] &gt; size[son[x]])	son[x] = edge[i].to;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> st[N], ed[N], belong[N], dfsClock, fun[N];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs2</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> top)</span></span>&#123;</span><br><span class="line">	st[x] = ++dfsClock, fun[dfsClock] = x;</span><br><span class="line">	belong[x] = top;</span><br><span class="line">	<span class="keyword">if</span>(son[x])	<span class="built_in">dfs2</span>(son[x], top);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = head[x]; i; i = edge[i].nxt)&#123;</span><br><span class="line">		<span class="keyword">if</span>(edge[i].to == fa[x] || edge[i].to == son[x])	<span class="keyword">continue</span>;</span><br><span class="line">		<span class="built_in">dfs2</span>(edge[i].to, edge[i].to);</span><br><span class="line">	&#125;</span><br><span class="line">	ed[x] = dfsClock;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta"># <span class="meta-keyword">define</span> lid id&lt;&lt;1</span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">define</span> rid id&lt;&lt;1|1</span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">define</span> mid ((tr[id].l+tr[id].r)&gt;&gt;1)</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">segTree</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> l, r;</span><br><span class="line">	LL mx, sum;</span><br><span class="line">	<span class="built_in">segTree</span>()&#123;</span><br><span class="line">		l = r = <span class="number">0</span>;</span><br><span class="line">		sum = <span class="number">0ll</span>;</span><br><span class="line">		mx = -INF;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;tr[N&lt;&lt;<span class="number">2</span>];</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">	<span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">pushup</span><span class="params">(<span class="keyword">int</span> id)</span></span>&#123;</span><br><span class="line">		tr[id].mx = <span class="built_in">max</span>(tr[lid].mx, tr[rid].mx);</span><br><span class="line">		tr[id].sum = tr[lid].sum + tr[rid].sum;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">build</span><span class="params">(<span class="keyword">int</span> id, <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span></span>&#123;</span><br><span class="line">		tr[id].l = l, tr[id].r = r;</span><br><span class="line">		<span class="keyword">if</span>(tr[id].l == tr[id].r)&#123;</span><br><span class="line">			tr[id].mx = tr[id].sum = a[fun[l]];</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">build</span>(lid, l, mid);</span><br><span class="line">		<span class="built_in">build</span>(rid, mid+<span class="number">1</span>, r);</span><br><span class="line">		<span class="built_in">pushup</span>(id);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function">LL <span class="title">query</span><span class="params">(<span class="keyword">int</span> id, <span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> k)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(tr[id].l == l &amp;&amp; tr[id].r == r)</span><br><span class="line">			<span class="keyword">return</span> k == <span class="number">0</span> ? tr[id].mx : tr[id].sum;</span><br><span class="line">		<span class="keyword">if</span>(r &lt;= mid)	<span class="keyword">return</span> <span class="built_in">query</span>(lid, l, r, k);</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(l &gt; mid)	<span class="keyword">return</span> <span class="built_in">query</span>(rid, l, r, k);</span><br><span class="line">		<span class="keyword">else</span>	<span class="keyword">return</span> k == <span class="number">0</span> ? <span class="built_in">max</span>(<span class="built_in">query</span>(lid, l, mid, k), <span class="built_in">query</span>(rid, mid+<span class="number">1</span>, r, k)) : <span class="built_in">query</span>(lid, l, mid, k) + <span class="built_in">query</span>(rid, mid+<span class="number">1</span>, r, k);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">modify</span><span class="params">(<span class="keyword">int</span> id, <span class="keyword">int</span> pos, LL v)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(tr[id].l == tr[id].r)&#123;</span><br><span class="line">			tr[id].sum = tr[id].mx = v;</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(pos &lt;= mid)	<span class="built_in">modify</span>(lid, pos, v);</span><br><span class="line">		<span class="keyword">else</span>	<span class="built_in">modify</span>(rid, pos, v);</span><br><span class="line">		<span class="built_in">pushup</span>(id);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;seg;</span><br><span class="line"></span><br><span class="line"><span class="function">LL <span class="title">query</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> v, <span class="keyword">int</span> k)</span></span>&#123;</span><br><span class="line">	LL res = k == <span class="number">0</span> ? -INF : <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span>(belong[u] != belong[v])&#123;</span><br><span class="line">		<span class="keyword">if</span>(dep[belong[u]] &lt; dep[belong[v]])	<span class="built_in">swap</span>(u, v);</span><br><span class="line">		res = k == <span class="number">0</span> ? <span class="built_in">max</span>(res, seg.<span class="built_in">query</span>(<span class="number">1</span>, st[belong[u]], st[u], <span class="number">0</span>)) : res + seg.<span class="built_in">query</span>(<span class="number">1</span>, st[belong[u]], st[u], <span class="number">1</span>);</span><br><span class="line">		u = fa[belong[u]];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(dep[u] &gt; dep[v])	<span class="built_in">swap</span>(u, v);</span><br><span class="line">	res = k == <span class="number">0</span> ? <span class="built_in">max</span>(res, seg.<span class="built_in">query</span>(<span class="number">1</span>, st[u], st[v], <span class="number">0</span>)) : res + seg.<span class="built_in">query</span>(<span class="number">1</span>, st[u], st[v], <span class="number">1</span>);</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++)&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;u, &amp;v);</span><br><span class="line">		<span class="built_in">addEdge</span>(u, v);</span><br><span class="line">		<span class="built_in">addEdge</span>(v, u);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%lld&quot;</span>, &amp;a[i]);</span><br><span class="line">	<span class="built_in">dfs1</span>(<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>);</span><br><span class="line">	<span class="built_in">dfs2</span>(<span class="number">1</span>, <span class="number">1</span>);</span><br><span class="line">	seg.<span class="built_in">build</span>(<span class="number">1</span>, <span class="number">1</span>, n);</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;q);</span><br><span class="line">	<span class="keyword">while</span>(q--)&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%s%d%d&quot;</span>, opt, &amp;u, &amp;v);</span><br><span class="line">		<span class="keyword">if</span>(opt[<span class="number">0</span>] == <span class="string">&#x27;C&#x27;</span>)</span><br><span class="line">			seg.<span class="built_in">modify</span>(<span class="number">1</span>, st[u], <span class="number">1ll</span>*v);</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(opt[<span class="number">1</span>] == <span class="string">&#x27;M&#x27;</span>)</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;%lld\n&quot;</span>, <span class="built_in">query</span>(u, v, <span class="number">0</span>));</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(opt[<span class="number">1</span>] == <span class="string">&#x27;S&#x27;</span>)</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;%lld\n&quot;</span>, <span class="built_in">query</span>(u, v, <span class="number">1</span>));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/blog-oi/tags/ZJOI/" rel="tag"># ZJOI</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/blog-oi/2018/04/28/SDOI2011-%E6%9F%93%E8%89%B2%EF%BC%88%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86%EF%BC%8C%E7%BA%BF%E6%AE%B5%E6%A0%91%EF%BC%89/" rel="prev" title="[SDOI2011]染色（树链剖分，线段树）">
+                  <i class="fa fa-chevron-left"></i> [SDOI2011]染色（树链剖分，线段树）
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/blog-oi/2018/04/30/%E6%99%AE%E9%80%9A%E5%B9%B3%E8%A1%A1%E6%A0%91-%E6%96%87%E8%89%BA%E5%B9%B3%E8%A1%A1%E6%A0%91-%E4%BA%8C%E9%80%BC%E5%B9%B3%E8%A1%A1%E6%A0%91/" rel="next" title="普通平衡树/文艺平衡树/二逼平衡树">
+                  普通平衡树/文艺平衡树/二逼平衡树 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xyfJASON</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/blog-oi/js/comments.js"></script><script src="/blog-oi/js/utils.js"></script><script src="/blog-oi/js/motion.js"></script><script src="/blog-oi/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/blog-oi/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/blog-oi/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog-oi/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog-oi/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog-oi/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/blog-oi/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/blog-oi/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"xyfjason.github.io","root":"/blog-oi/","images":"/blog-oi/images","scheme":"Gemini","darkmode":false,"version":"8.8.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/blog-oi/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/blog-oi/js/config.js"></script>
+<meta name="description" content="转载自洛谷日报#18 蒟蒻烟雨平生的博客">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[转载]洛谷日报#18 简单食用的博弈论">
+<meta property="og:url" content="http://xyfjason.github.io/blog-oi/2018/08/02/%E8%BD%AC%E8%BD%BD-%E6%B4%9B%E8%B0%B7%E6%97%A5%E6%8A%A5-18-%E7%AE%80%E5%8D%95%E9%A3%9F%E7%94%A8%E7%9A%84%E5%8D%9A%E5%BC%88%E8%AE%BA/index.html">
+<meta property="og:site_name" content="xyfJASON">
+<meta property="og:description" content="转载自洛谷日报#18 蒟蒻烟雨平生的博客">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://xyfjason.github.io/blog-oi/2018/08/02/%E8%BD%AC%E8%BD%BD-%E6%B4%9B%E8%B0%B7%E6%97%A5%E6%8A%A5-18-%E7%AE%80%E5%8D%95%E9%A3%9F%E7%94%A8%E7%9A%84%E5%8D%9A%E5%BC%88%E8%AE%BA/1.png">
+<meta property="og:image" content="http://xyfjason.github.io/blog-oi/2018/08/02/%E8%BD%AC%E8%BD%BD-%E6%B4%9B%E8%B0%B7%E6%97%A5%E6%8A%A5-18-%E7%AE%80%E5%8D%95%E9%A3%9F%E7%94%A8%E7%9A%84%E5%8D%9A%E5%BC%88%E8%AE%BA/2.png">
+<meta property="og:image" content="http://xyfjason.github.io/blog-oi/2018/08/02/%E8%BD%AC%E8%BD%BD-%E6%B4%9B%E8%B0%B7%E6%97%A5%E6%8A%A5-18-%E7%AE%80%E5%8D%95%E9%A3%9F%E7%94%A8%E7%9A%84%E5%8D%9A%E5%BC%88%E8%AE%BA/3.png">
+<meta property="og:image" content="http://xyfjason.github.io/blog-oi/2018/08/02/%E8%BD%AC%E8%BD%BD-%E6%B4%9B%E8%B0%B7%E6%97%A5%E6%8A%A5-18-%E7%AE%80%E5%8D%95%E9%A3%9F%E7%94%A8%E7%9A%84%E5%8D%9A%E5%BC%88%E8%AE%BA/4.png">
+<meta property="og:image" content="http://xyfjason.github.io/blog-oi/2018/08/02/%E8%BD%AC%E8%BD%BD-%E6%B4%9B%E8%B0%B7%E6%97%A5%E6%8A%A5-18-%E7%AE%80%E5%8D%95%E9%A3%9F%E7%94%A8%E7%9A%84%E5%8D%9A%E5%BC%88%E8%AE%BA/5.png">
+<meta property="og:image" content="http://xyfjason.github.io/blog-oi/2018/08/02/%E8%BD%AC%E8%BD%BD-%E6%B4%9B%E8%B0%B7%E6%97%A5%E6%8A%A5-18-%E7%AE%80%E5%8D%95%E9%A3%9F%E7%94%A8%E7%9A%84%E5%8D%9A%E5%BC%88%E8%AE%BA/6.png">
+<meta property="og:image" content="http://xyfjason.github.io/blog-oi/2018/08/02/%E8%BD%AC%E8%BD%BD-%E6%B4%9B%E8%B0%B7%E6%97%A5%E6%8A%A5-18-%E7%AE%80%E5%8D%95%E9%A3%9F%E7%94%A8%E7%9A%84%E5%8D%9A%E5%BC%88%E8%AE%BA/7.png">
+<meta property="og:image" content="http://xyfjason.github.io/blog-oi/2018/08/02/%E8%BD%AC%E8%BD%BD-%E6%B4%9B%E8%B0%B7%E6%97%A5%E6%8A%A5-18-%E7%AE%80%E5%8D%95%E9%A3%9F%E7%94%A8%E7%9A%84%E5%8D%9A%E5%BC%88%E8%AE%BA/8.png">
+<meta property="og:image" content="http://xyfjason.github.io/blog-oi/2018/08/02/%E8%BD%AC%E8%BD%BD-%E6%B4%9B%E8%B0%B7%E6%97%A5%E6%8A%A5-18-%E7%AE%80%E5%8D%95%E9%A3%9F%E7%94%A8%E7%9A%84%E5%8D%9A%E5%BC%88%E8%AE%BA/9.png">
+<meta property="article:published_time" content="2018-08-02T05:00:39.000Z">
+<meta property="article:modified_time" content="2021-11-23T02:21:05.856Z">
+<meta property="article:author" content="xyfJASON">
+<meta property="article:tag" content="洛谷日报">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://xyfjason.github.io/blog-oi/2018/08/02/%E8%BD%AC%E8%BD%BD-%E6%B4%9B%E8%B0%B7%E6%97%A5%E6%8A%A5-18-%E7%AE%80%E5%8D%95%E9%A3%9F%E7%94%A8%E7%9A%84%E5%8D%9A%E5%BC%88%E8%AE%BA/1.png">
+
+
+<link rel="canonical" href="http://xyfjason.github.io/blog-oi/2018/08/02/%E8%BD%AC%E8%BD%BD-%E6%B4%9B%E8%B0%B7%E6%97%A5%E6%8A%A5-18-%E7%AE%80%E5%8D%95%E9%A3%9F%E7%94%A8%E7%9A%84%E5%8D%9A%E5%BC%88%E8%AE%BA/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://xyfjason.github.io/blog-oi/2018/08/02/%E8%BD%AC%E8%BD%BD-%E6%B4%9B%E8%B0%B7%E6%97%A5%E6%8A%A5-18-%E7%AE%80%E5%8D%95%E9%A3%9F%E7%94%A8%E7%9A%84%E5%8D%9A%E5%BC%88%E8%AE%BA/","path":"2018/08/02/转载-洛谷日报-18-简单食用的博弈论/","title":"[转载]洛谷日报#18 简单食用的博弈论"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>[转载]洛谷日报#18 简单食用的博弈论 | xyfJASON</title>
+  
+
+  <script src="/blog-oi/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?f7e5c188ac0fc91848fb599cdef123bf"></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/blog-oi/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/blog-oi/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">xyfJASON</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">诗酒趁年华</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/blog-oi/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-about"><a href="/blog-oi/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+        <li class="menu-item menu-item-tags"><a href="/blog-oi/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/blog-oi/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/blog-oi/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80-%E5%9B%9A%E5%BE%92%E5%8D%9A%E5%BC%88%E8%AE%BA%E2%80%94%E2%80%94%E4%B8%BA%E4%BD%95%E8%B5%B0%E5%90%91%E7%A9%B7%E9%80%94%E6%9C%AB%E8%B7%AF%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">一. 囚徒博弈论——为何走向穷途末路？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C-%E6%9E%AA%E6%89%8B%E5%8D%9A%E5%BC%88%E8%AE%BA%E2%80%94%E2%80%94%E5%BC%B1%E8%80%85%E7%9A%84%E7%94%9F%E5%AD%98%E6%B3%95%E5%88%99"><span class="nav-number">2.</span> <span class="nav-text">二.枪手博弈论——弱者的生存法则</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89-%E6%B5%B7%E7%9B%97%E5%88%86%E9%87%91%E5%8D%9A%E5%BC%88%E8%AE%BA%E2%80%94%E2%80%94%E5%80%92%E6%8E%A8%E5%8F%96%E8%83%9C"><span class="nav-number">3.</span> <span class="nav-text">三.海盗分金博弈论——倒推取胜</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">xyfJASON</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/blog-oi/archives/">
+          <span class="site-state-item-count">41</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/blog-oi/categories/">
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/blog-oi/tags/">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/xyfjason" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;xyfjason" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://309459245.lofter.com/" title="http:&#x2F;&#x2F;309459245.lofter.com&#x2F;" rel="noopener" target="_blank">yjq</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://mcfx.us/" title="https:&#x2F;&#x2F;mcfx.us&#x2F;" rel="noopener" target="_blank">mcfx</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.csdn.net/wxh010910" title="https:&#x2F;&#x2F;blog.csdn.net&#x2F;wxh010910" rel="noopener" target="_blank">wxh010910</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.csdn.net/yfzcsc" title="https:&#x2F;&#x2F;blog.csdn.net&#x2F;yfzcsc" rel="noopener" target="_blank">yfzcsc</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://owenowl.net/blogs/" title="http:&#x2F;&#x2F;owenowl.net&#x2F;blogs&#x2F;" rel="noopener" target="_blank">OwenOwl</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.csdn.net/OwenOwl" title="https:&#x2F;&#x2F;blog.csdn.net&#x2F;OwenOwl" rel="noopener" target="_blank">OwenOwl(CSDN)</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.csdn.net/Joker_69" title="https:&#x2F;&#x2F;blog.csdn.net&#x2F;Joker_69" rel="noopener" target="_blank">Joker</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://hzwer.com/" title="http:&#x2F;&#x2F;hzwer.com&#x2F;" rel="noopener" target="_blank">hzwer</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://ruanx.pw/" title="http:&#x2F;&#x2F;ruanx.pw" rel="noopener" target="_blank">ruanx</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/candy99/" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;candy99&#x2F;" rel="noopener" target="_blank">Candy?</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://oi.men.ci/#blog" title="https:&#x2F;&#x2F;oi.men.ci&#x2F;#blog" rel="noopener" target="_blank">Menci</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://rqy.moe/" title="https:&#x2F;&#x2F;rqy.moe&#x2F;" rel="noopener" target="_blank">_rqy</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://www.cnblogs.com/mlystdcall/" title="http:&#x2F;&#x2F;www.cnblogs.com&#x2F;mlystdcall&#x2F;" rel="noopener" target="_blank">__stdcall</a>
+        </li>
+    </ul>
+  </div>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xyfjason.github.io/blog-oi/2018/08/02/%E8%BD%AC%E8%BD%BD-%E6%B4%9B%E8%B0%B7%E6%97%A5%E6%8A%A5-18-%E7%AE%80%E5%8D%95%E9%A3%9F%E7%94%A8%E7%9A%84%E5%8D%9A%E5%BC%88%E8%AE%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog-oi/images/avatar.gif">
+      <meta itemprop="name" content="xyfJASON">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xyfJASON">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [转载]洛谷日报#18 简单食用的博弈论
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-08-02 13:00:39" itemprop="dateCreated datePublished" datetime="2018-08-02T13:00:39+08:00">2018-08-02</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-11-23 10:21:05" itemprop="dateModified" datetime="2021-11-23T10:21:05+08:00">2021-11-23</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/blog-oi/categories/%E5%8D%9A%E5%BC%88%E8%AE%BA/" itemprop="url" rel="index"><span itemprop="name">博弈论</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">转载自洛谷日报#18 蒟蒻烟雨平生的博客</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p><a target="_blank" rel="noopener" href="https://www.luogu.org/blog/85682/bo-yi-lun">原文链接</a></p>
+<blockquote>
+<p>博弈论又被称为对策论（Game Theory），既是现代数学的一个新分支，也是运筹学的一个重要学科。学习博弈论，可以指导我们这个充满竞争的世界中，我们要怎么做才能让自己（或者自己的集体）利益最大化。（《百度百科》）</p>
+</blockquote>
+<p><strong>特别鸣谢：@daifucong 感谢指出文章中的错误。</strong><br>博弈时往往有三种结果：负和博弈、零和博弈与正和博弈，用通俗的话解释就是两败俱伤、一方获利一方亏损和双赢。正和博弈当然是最好的结果，但是往往无法达成。</p>
+<p>博弈论有很多的种类，我们介绍其中的几种。</p>
+<h1 id="一-囚徒博弈论——为何走向穷途末路？"><a href="#一-囚徒博弈论——为何走向穷途末路？" class="headerlink" title="一. 囚徒博弈论——为何走向穷途末路？"></a>一. 囚徒博弈论——为何走向穷途末路？</h1><p>有一个广为流传的故事：两个罪犯甲、乙入室盗窃并将屋子的主人杀害，被捕后分别审讯，他们都只承认盗窃罪，不承认故意杀人罪，这样他们都会被判处1年有期徒刑。这似乎对他们来说是最好的情况，但是后来他们却纷纷承认故意杀人罪，为什么呢？</p>
+<p><img src="1.png"></p>
+<p>原因很简单：他们是分开审讯的。</p>
+<p>假设盗窃罪判刑1年，故意杀人罪判刑8年，被别人揭穿会加刑1年，坦白减刑2年，那么就可以绘制一个简易的博弈论模型：</p>
+<p><img src="2.png"></p>
+<p>图真是太<del>不</del>美了(●—●)</p>
+<p>明明可以少坐6年牢，为什么要招供呢？不妨从甲和乙的角度来考虑：由于不知道对方的消息，甲会认为，我不知道能不能相信乙，万一他先招供了，我就会坐10年的牢，为了不引起最坏的后果，还能够释放，我必须先招认！同样的，乙的想法和甲类似，再加上警察煽风点火，于是便纷纷招供，最后的结果是两人一起坐7年的牢。</p>
+<p><img src="3.png"></p>
+<p>这就呈现了所谓博弈论中的“纳什均衡”，简单来说是如果参加博弈的一方不改变策略，另一方就无法得到更好的结果，往往走向负和博弈，有兴趣的小伙伴可以点进去了解一下 $qwq$</p>
+<p>这就是最经典的囚徒博弈论。</p>
+<h1 id="二-枪手博弈论——弱者的生存法则"><a href="#二-枪手博弈论——弱者的生存法则" class="headerlink" title="二.枪手博弈论——弱者的生存法则"></a>二.枪手博弈论——弱者的生存法则</h1><p>故事是这样的：三个枪手（大佬，蒟蒻，我）积怨已久，决定进行一场决斗。当然，他们不是机器人，枪法有一定的差别（即使是大白也不会百发百中的），大佬是个神枪手，命中率是80%，蒟蒻差一些，命中率是60%，我最菜了。。。???????命中率只有40%（<del>这是不是和我不常刷题有关(；д；)</del>），<strong>如果在每人一枪只打出1颗子弹，且击中必杀，大家都保持绝对理性的前提下，</strong>出现了两个问题：</p>
+<p>1.如果我们三个人同时开枪，谁活下来的概率会最大？ 2.如果我们轮流开枪，采用什么策略活下来的概率会大？</p>
+<p>首先讨论第1个问题，如果我们同时开枪，大佬一定是会把枪口对准蒟蒻的（他都是大佬了，不可能出现低级失误233），因为蒟蒻的命中率要比我高，他一定要先杀死对自己威胁大的那一个人。而蒟蒻会向大佬开枪，道理和大佬相同，我呢，自然把枪对准了大佬。这时来看一下3人的存活率，大佬是24%，蒟蒻是20%，至于我呢，因为没有人瞄准我，所以我的存活率是100%。这时，最菜的我反而成了存活率最高的人呢。( ? ?ω?? )?</p>
+<p><img src="4.png"></p>
+<p>好了，现在讨论第2个问题，如果我们轮流开枪呢？</p>
+<ol>
+<li>大佬先开枪<br>依照“先杀死威胁大的目标的原则”，大佬自然要把枪口对准蒟蒻，如果杀死了……（此处省略血腥内容）如果没杀死呢，蒟蒻自然会向大佬开枪，全程我可以毫发无埙。这时，我再拿起枪，瞄准剩下的一个目标，（或者两个目标都活着的话就朝天）开一枪，娱乐一下，胜率我仍然是最大的。so easy！<del>妈妈再也不用担心我打不准了</del></li>
+<li>蒟蒻先开枪<br>蒟蒻会把枪口对准对他更具有威胁的大佬，我不会有危险，如果它命中了，我就向蒟蒻开枪，没打中就朝大佬开枪，最后我的存活率仍然是最大的。(　 ′-ω ?)▄︻┻┳══━一</li>
+<li>我先开枪<br>这是一个很让我纠结的问题，我该先向谁开枪呢？打大佬？没打中还好，会转化成大佬先开枪的情况（也难保他不记仇呀），万一RP不足手抖打中了呢，那就只剩下我和蒟蒻两人了，他一定会朝我开枪了,那我可就很危险了呀！不行不行，我可不能这么草率。那么如果朝蒟蒻开枪呢？那也是一样的，打中了反而会使自己置于更加危险的境地，因为大佬的命中率更高。打谁都不是，那么该怎么办呢？结论是：朝天开枪。Σ(?д?lll)这确实很滑稽，但也是最有效的方法，能够让情况变为大佬先开枪。所以博弈时往往要出奇策才能够取胜。</li>
+</ol>
+<p>不信的话大家可以试一下，三个砝码，一个骰子（虽然无法得到80%，60%和40%，但是可以先用一下），开枪时转动骰子，如果大佬转到1,2,3,4,5，那么他杀死了他的目标，蒟蒻转到1,2,3，那么他杀死了他的目标，如果我<del>菜鸡</del>转到1，那么我杀死了我的目标。</p>
+<p>多试几次，看看谁的存活率大！</p>
+<p>好了，我们继续<del>狗血</del>剧情，我们突然握手言和了，决定改日再战……（剧本太狗血，我编不下去了。。。）啊，反正就是这次我们没有决斗，然后呢，大家都想在下一次的决斗中把对方打趴下，回家苦练枪法，大佬的命中率提升到了100%（蒟蒻知道了吓得瑟瑟发抖），蒟蒻不甘落后命中率提高到80%，我太懒了也太菜了，命中率毫无提升，还是40%（我是一个比蒟蒻还弱的人）＼( ′?∧?｀)／ ，于是，按照领错了的剧本，我们又相遇了，又要决斗，那么按照刚才的情况推理，大佬向蒟蒻开枪，蒟蒻向大佬开枪，我向大佬开枪，大佬的存活率是12%，蒟蒻的存活率是0%（快给他准备一份便当！），我的存活率是100%，依然是最高的ヽ(≧?≦)?，但是其余两人的存活率却发生了变化，这说明，只要任何数据发生变化，存活率都会发生巨大的变化。</p>
+<p>本来故事要结束了，突然，导演（<strong>我怎么会告诉你那就是我？！</strong>）认为蒟蒻还应该有戏份，于是又让他们握手言和了（什么鬼？！）。这会大家（包括我啦）都意识到了枪法的重要性，开始苦砺枪法，命中率都提升到了100%，后来（你已经猜到了），我们又一次相遇了。<strong>这次每人只有一颗子弹</strong>，两个问题：</p>
+<ol>
+<li>同时放枪，你会选择打人还是放空枪？</li>
+<li>由我先开始放枪，我该打人还是放空枪？</li>
+</ol>
+<p><img src="5.png"></p>
+<p>先讨论1，结束后无非4种情况：</p>
+<p>(1) 自己活着，另外两个人去领盒饭了；<br>(2) 自己活着，另外一个人也活着；<br>(3) 自己和另一个人一起去领盒饭；<br>(4) 自己独自去领盒饭。</p>
+<p>因为别人指向谁开枪是无法预测的，所以每个人的存活率是相等的，这时如果放弃开枪，就会让另外两人的存活率提高，所以这时应该朝任何一个人开一枪，至少不减小对他人的威胁，因为大家命中率都是100%，所以这时打谁就显得不那么重要了，朝一个人放一枪，听天由命吧。</p>
+<p>再来讨论2，那就会有很大的不同，分情况讨论一下：</p>
+<p>(1) 朝人开枪：必定杀死一人，然后场上变为两人，另外一人开枪，那么他必定会朝我开枪，然后就没有然后了。。。</p>
+<p>不可取不可取，我还没演完呢，不能去领盒饭|。?ω?)っ</p>
+<p>(2) 于是乎应该考虑另一种方法：放空枪。</p>
+<p>一旦我打出了仅有的一颗子弹后，我对于另外两人便变得没有威胁了，这样轮到下一个人开枪时，他一定会朝另外一个人开枪，因为如果第二个人不打死他而是选择放空枪，下一回合他就会有50%的概率被干掉，这是不可取的。</p>
+<p>这样就变成了一个另外两方自相残杀的局面，从而最后两个人活下来。</p>
+<p>但是如果他识破了我的计谋要朝我放枪呢？那样他就一定会被第三个人打挂，还不如放空枪的存活率，他一定会打死第三个人。</p>
+<p>综上所述，放空枪是最有利的选择。</p>
+<p><img src="6.png"></p>
+<p>讲了这么多，大家心里应该有个疑问：</p>
+<p><strong>这讲的都是模型，有应用价值吗？</strong></p>
+<p>其实大家耳熟能详的历史中就有呀(～￣▽￣)～</p>
+<p>三方对立，有强有弱，互相牵制，大家想到了什么？</p>
+<p><strong>对，是三国！</strong></p>
+<p>三国时期的赤壁之战，刘备最弱，孙权其次，曹操最强，曹操要和孙权干架，诸葛亮的想法是：二虎相争，必有一伤，如果曹操输了必定一蹶不振，孙权就会向刘备开刀，如果孙权被灭，曹操也必定会攻打刘备。这时刘备帮助较弱的孙权，将曹操打败，但是又“一不小心”让关羽把曹操在华容道放掉了，以达到制衡的目的。节省篇幅，这里战争细节就不扯了。这就是枪手博弈论的应用。</p>
+<p><img src="7.png"></p>
+<p>那么为啥不帮曹操呢？</p>
+<p>这是因为魏国实力更强，如果联曹攻吴，东吴很可能会被灭掉，蜀国为了避免不利情况出现，应该联吴抗曹，这样不足以将魏国消灭。</p>
+<p>好了，导演要逃杀青了，下一集海盗分金见！ $qwq$</p>
+<p><strong>这一集真的要剧终了</strong></p>
+<h1 id="三-海盗分金博弈论——倒推取胜"><a href="#三-海盗分金博弈论——倒推取胜" class="headerlink" title="三.海盗分金博弈论——倒推取胜"></a>三.海盗分金博弈论——倒推取胜</h1><p><strong>这一讲跟海盗打仗无关！！！</strong><br>故事是这样的：</p>
+<p>5个海盗抢了100个金币（我说过跟打仗无关），准备分，但是他们分的方法非常奇特（为什么不平分？）他们准备了5个签，分别写上1,2,3,4,5，然后抽签，按抽签顺序（从小到大）轮流制定方案，从1号开始，他制定了分金方案后大家需要立即表决（该海盗也表决），如果有半数以上（<strong>含半数</strong>）的人支持，则方案通过，按此方案分金，否则（<strong>重口味的来了！</strong>）就会被扔到海里喂鲨鱼。</p>
+<p>我们做如下假设：</p>
+<ol>
+<li>每一个海盗都是绝对理性的，且思考周全，智商极高，不会做出错误判断。</li>
+<li>不存在某些海盗私下结伙或有仇的情况。</li>
+<li>海盗不会因为通过的提案对自己不利而大打出手。</li>
+<li>所有海盗都不想去喂鲨鱼。</li>
+<li>所有海盗都想获得更多的金币。</li>
+</ol>
+<p>好了，现在如果你是1号海盗，你该如何使自己获得最大利益？</p>
+<p>表面上看1号海盗是最不利的，因为他最有可能去喂鲨鱼，因为参与分金的海盗越少，越能获得更多利益，即使自己分文不取将金币全分给另外四个海盗，他们也仍然有可能会把他扔给鲨鱼。</p>
+<p>怎么办？怎么办？怎么办？现在好慌呀！我不想喂鲨鱼！</p>
+<p><img src="8.png"></p>
+<p>别急，咱冷静一下，再看一遍规则，你会发现一个突破点：</p>
+<p><strong>如果有半数以上（含半数）的人支持，则方案通过</strong><br>欸，也就是说不需要获得所有人的支持呀？我只要笼络2个处于劣势的海盗就可以不喂鲨鱼了！不慌了！</p>
+<p>可是，应该笼络谁呢？又该如何笼络呢？</p>
+<p>这时往往会三等分，但是这对分到金币的另外两个海盗显然不是最佳方案，行不通呀。</p>
+<p>这时大家可能会嫉妒5号，既安全又能分钱。</p>
+<p>别急着嫉妒，请大家回去看一遍本小节的标题。</p>
+<p>看完了吗？倒推取胜对不对？那我们就从简单的情况想起：</p>
+<p>5号明显是最安全的，因为他没有喂鲨鱼的危险，但是他真的能分到钱吗？[?_??]</p>
+<p>倒推举例证明：</p>
+<p><img src="9.png"></p>
+<p>假设只剩4号，5号两人，你、2号和3号都喂鲨鱼了（当然你不想这样），这时4号分金，他会怎么办呢，肯定会是100:0，表决时4号一定赞成，5号即使反对，支持人数也过了半数，表决结果是5号无法改变的，这样5号就会颗粒无收，<strong>这时他处于劣势</strong>，所以3号的提案里只要给他1枚金币，他就一定会赞成来避免自己的劣势情况，同样的，按照笼络劣势海盗原则，3号海盗指定的方案应该是99:0:1，放弃4号，笼络5号，这样3号，5号赞成，提议通过，5号获利1金币，不再处于劣势，处在劣势的变成了4号。</p>
+<p>是不是有头绪了？我们再加上一个海盗，2号制定方案，应该笼络处于劣势的4号海盗，方案为：99:0:1:0（当然也可以笼络5号，方法不止一种），2号、4号海盗赞成，提议通过。劣势海盗为3号。</p>
+<p>最后加上1号海盗，也就是我们，应该笼络谁呢，首先要笼络劣势的3号，放弃优势的2号，再在4号、5号之间任选一个，制定方案（一种例子，大家可以再想其他的）为：98:0:1:1:0，就可以通过。</p>
+<p>没想到吧，看似最危险的1号可以化险为夷还能疯狂敛财，最安全的5号却可能颗粒无收，如果正思入手，很容易卡住，倒推却容易多了，大家要学会用。</p>
+<p>当然，现实生活中大家或多或少都是非理性的，海盗往往宁可同归于尽也不会让1号拿走98枚金币的，所以这个模型仅供分析</p>
+<p>博弈论的几个分支就讲到这里，希望对大家有所帮助！</p>
+<p>拜拜咯！</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/blog-oi/tags/%E6%B4%9B%E8%B0%B7%E6%97%A5%E6%8A%A5/" rel="tag"># 洛谷日报</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/blog-oi/2018/07/25/HNOI2004-%E5%AE%A0%E7%89%A9%E6%94%B6%E5%85%BB%E5%9C%BA%EF%BC%88%E5%B9%B3%E8%A1%A1%E6%A0%91-set%EF%BC%89/" rel="prev" title="[HNOI2004]宠物收养场（平衡树/set）">
+                  <i class="fa fa-chevron-left"></i> [HNOI2004]宠物收养场（平衡树/set）
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/blog-oi/2018/08/06/Codeforces-1016-E-Rest-In-The-Shades%EF%BC%88%E4%BA%8C%E5%88%86%EF%BC%8C%E7%AE%80%E5%8D%95%E5%87%A0%E4%BD%95%EF%BC%89/" rel="next" title="[Codeforces 1016.E] Rest In The Shades（二分，简单几何）">
+                  [Codeforces 1016.E] Rest In The Shades（二分，简单几何） <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xyfJASON</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/blog-oi/js/comments.js"></script><script src="/blog-oi/js/utils.js"></script><script src="/blog-oi/js/motion.js"></script><script src="/blog-oi/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/blog-oi/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/blog-oi/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
